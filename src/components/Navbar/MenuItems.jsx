@@ -1,17 +1,23 @@
 export const MenuItems =[
-  {
-    title:'Home',
-    url:'/',
+   {
+    title:'Calendar',
+    url:'/Calendar',
     cName:'nav-links'
   },
+
   {
-    title:'Register',
-    url:'/signup',
+    title:'Profile',
+    url:'/profile',
     cName:'nav-links'
   },
   {
     title:'Login',
     url:'/login',
     cName:'nav-links'
-  }
+  },
+  // {
+  //   title:'Logout',
+  //   url:'/logout',
+  //   cName:'nav-links'
+  // }
 ]

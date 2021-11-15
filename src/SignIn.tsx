@@ -13,9 +13,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from '@material-ui/core/styles';
+import swal from 'sweetalert';
 import React, { useState } from 'react';
-import swal from 'react-bootstrap-sweetalert';
-import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,11 +63,18 @@ async function loginUser(credentials) {
 
 
 
+
+
+
+
+
+
+
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://meeplanwebsite-1.meeplan.repl.co/">
+      <Link color="inherit" href="https://meeplanwebsite-1.meeplan.repl.co">
         Meeplan
       </Link>{' '}
       {new Date().getFullYear()}
@@ -97,73 +103,83 @@ export default function SignIn() {
       .then((value) => {
         localStorage.setItem('accessToken', response['accessToken']);
         localStorage.setItem('user', JSON.stringify(response['user']));
-        window.location.href = "/";
+        window.location.href = "/profile";
       });
     } else {
       swal("Failed", response.message, "error");
     }
   }
 
-
-
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   // eslint-disable-next-line no-console
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-  // };
-
-
-
   return (
-    <Grid container className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} md={7} className={classes.image} />
-      <Grid item xs={12} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Login
           </Typography>
-          <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
-              variant="outlined"
               margin="normal"
               required
               fullWidth
-              id="email"
-              name="email"
-              label="Email Address"
+              id="username"
+              label="karn.yong@mecallapi.com"
+              name="username"
+              autoComplete="username"
+              autoFocus
               onChange={e => setUserName(e.target.value)}
             />
             <TextField
-              variant="outlined"
               margin="normal"
               required
               fullWidth
-              id="password"
               name="password"
-              label="Password"
+              label="mecallapi"
               type="password"
+              id="password"
+              autoComplete="current-password"
               onChange={e => setPassword(e.target.value)}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              sx={{ mt: 3, mb: 2 }}
               className={classes.submit}
             >
-              Sign In
+              Login
             </Button>
-          </form>
-        </div>
-      </Grid>
-    </Grid>
+            <Grid container>
+              <Grid item xs>
+                <Link href="https://www.google.com" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/SignUp" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        <Copyright sx={{ mt: 8, mb: 4 }} />
+      </Container>
+    </ThemeProvider>
   );
 }

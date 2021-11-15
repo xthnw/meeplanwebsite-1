@@ -3,10 +3,195 @@
   margin: 0;
   padding: 0;
   font-family: 'Dosis', sans-serif !important;
+  background-image: "./Picture/Bg.jpeg)" !important;
 }
 
 .BG{
   background-image: url(./Picture/Bg.jpeg) !important;
   background-size: 100% ;
   background-attachment: fixed;
+}
+
+.photo {
+  height: 50px;
+  width: 50px;
+}
+
+
+
+
+/*******************************
+  Hero background
+********************************/
+.hero {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 80vh;
+  min-height: 35rem;
+  background-color: rgb(255, 253, 247);
+
+  overflow: hidden;
+}
+
+/*******************************
+  Central icon and text
+********************************/
+.icon-holder {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(255, 253, 247, 0.5);
+  box-shadow: 0 0 10px 10px rgba(255, 253, 247, 0.5);
+  border-radius: 3rem;
+  padding: 2rem;
+  height: 19rem;
+}
+
+.icon-holder__icon {
+  position: absolute;
+  top: 0;
+  width: 14rem;
+}
+
+.icon-holder__icon img {
+  max-width: 100%;
+}
+
+.icon-holder__text {
+  font-size: 4rem;
+  font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  bottom: 0;
+}
+
+/*******************************
+  Animal images
+********************************/
+.animal-image {
+  position: absolute;
+}
+
+.animal-image img {
+  max-width: 100%;
+}
+
+.animal-image__one {
+  left: -7rem;
+  width: 40vw;
+  max-width: 550px;
+}
+
+.animal-image__two {
+  top: 0;
+  right: 0;
+  width: 40vw;
+  max-width: 390px;
+}
+
+.animal-image__three {
+  bottom: 0;
+  right: 10rem;
+  width: 40vw;
+  max-width: 290px;
+}
+
+/*******************************
+  Responsive changes
+********************************/
+@media screen and (max-width: 876px) {
+  .hero {
+    height: 70vh;
+  }
+
+  /*******************************
+    Icon and text cover
+  ********************************/
+  .icon-holder {
+    width: 100%;
+    height: 100%;
+    justify-content: flex-end;
+  }
+
+  .icon-holder__icon {
+    top: auto;
+    bottom: 7rem;
+    max-width: 10rem;
+  }
+
+  /*******************************
+    Reposition images
+  ********************************/
+  .animal-image__one {
+    top: -5rem;
+    width: 80vw;
+  }
+
+  .animal-image__two {
+    right: 0rem;
+  }
+
+  .animal-image__three {
+    top: 18rem;
+    bottom: auto;
+    right: -5rem;
+    width: 50vw;
+  }
+
+  
+.lazy-div {
+  /* height: 50vh; */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 20px;
+  padding: 20px;
+  font-size: 1.5em;
+}
+
+
+
+
+
+}
+.trails-main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trails-text {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+  color: rgb(66, 61, 63);
+  font-size: 5em;
+  font-weight: 800;
+  text-transform: uppercase;
+  will-change: transform, opacity;
+  overflow: hidden;
+}
+
+.trails-text > div {
+  overflow: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
 }

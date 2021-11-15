@@ -69,16 +69,18 @@
     flex-direction: column;
     max-width: 960px !important;
     width: 100% !important;
-    height: 180px !important;
+    height: 220px !important;
     position: absolute !important;
     top: 80px!important;
     align-items: right;
     opacity: 1;
     transition: all 0.5s ease;
+    z-index: 1;
   }
 
   .nav-menu.active{
     background:#4f4e59;
+    padding-bottom: 1em!important;
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;

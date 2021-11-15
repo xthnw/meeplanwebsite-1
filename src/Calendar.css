@@ -1,0 +1,44 @@
+.Main{
+  font-family: 'Dosis', sans-serif !important;
+}
+
+.Header{
+  background-color: #4f4e59;
+  color: aliceblue;
+  font-family: 'Dosis', sans-serif !important;
+}
+
+.Button-task{
+  background-color: aliceblue;
+}
+
+.Button-Save{
+   background-color: aliceblue;
+}
+
+.Nav-todo{
+  background-color: #4f4e59;
+  color: aliceblue;
+  padding: 5px;
+  font-family: 'Dosis', sans-serif !important;
+  width: 93% !important;
+}
+
+.To-do{
+  font-family: 'Dosis', sans-serif !important;
+  padding: 10px;
+  background-color: aliceblue;
+  height: 450px;
+  align-items: center !important;
+  width: 93% !important;
+}
+
+.icon{
+  align-items: center !important;
+  justify-content: center;
+}
+
+.calendar{
+  background-color: rgb(248, 245, 204);
+}
+
