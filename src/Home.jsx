@@ -58,7 +58,6 @@ import IconHolder from "./IconHolder";
 import { hedgehogScene, raccoonScene, squirrelScene } from "./scenes";
 import TestBG from './TestBG';
 import LazyShow from './LazyShow';
-import t from './t';
 
 
 const SLIDE_CHANGE_TIME_MS = 5000;
