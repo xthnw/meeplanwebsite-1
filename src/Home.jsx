@@ -238,22 +238,22 @@ function Home() {
         hieht: '2224px'  }}*/>
 
             <h1><TestBG /><br /><Item style={{textAlign: "center"}}>_______________</Item></h1>
-            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'bold', fontSize: 80, fontFamily: 'Dosis'}} >
+            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'bold', fontSize: 100, fontFamily: 'Dosis'}} >
             <LazyShowY>
             FUNCTION 
             </LazyShowY> 
             </h2> <br />
-            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'bold', fontSize: 80, fontFamily: 'Dosis'}} >
+            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'bold', fontSize: 100, fontFamily: 'Dosis'}} >
             <LazyShowY>
             FUNCTION
             </LazyShowY>
             </h2> <br />
-            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'bold', fontSize: 80, fontFamily: 'Dosis'}} >
+            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'bold', fontSize: 100, fontFamily: 'Dosis'}} >
             <LazyShowY>
             FUNCTION
             </LazyShowY>
             </h2> <br />
-            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'bold', fontSize: 80, fontFamily: 'Dosis'}} >
+            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'bold', fontSize: 100, fontFamily: 'Dosis'}} >
             <LazyShowY>
             FUNCTION
             </LazyShowY>
@@ -392,7 +392,33 @@ function Home() {
                     </Box>
                 </Container>
             </React.Fragment>
-            <img src="./src/Picture/Bg.jpeg" />
+            <img src="./src/Picture/Bg.jpeg">
+            
+            
+            
+            </img>
+            <div>
+            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'normal', fontSize: 50, fontFamily: 'Dosis'}} >
+            <LazyShowY>
+            Mee Plan | Website & IoT
+            </LazyShowY> 
+            </h2>
+            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'normal', fontSize: 50, fontFamily: 'Dosis'}} >
+            <LazyShowY>
+            Mee Plan | Website & IoT
+            </LazyShowY> 
+            </h2>
+            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'normal', fontSize: 50, fontFamily: 'Dosis'}} >
+            <LazyShowY>
+            Mee Plan | Website & IoT
+            </LazyShowY> 
+            </h2>
+            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'normal', fontSize: 50, fontFamily: 'Dosis'}} >
+            <LazyShowY>
+            Mee Plan | Website & IoT
+            </LazyShowY> 
+            </h2>
+        </div>
         </div>
 
 
