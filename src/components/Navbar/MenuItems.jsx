@@ -1,3 +1,4 @@
+import '/src/App.css';
 export const MenuItems =[
    {
     title:'Calendar',

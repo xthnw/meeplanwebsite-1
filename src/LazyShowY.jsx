@@ -35,10 +35,10 @@ const LazyShow = ({ children }) => {
     useEffect(() => {
         if (onScreen) {
             controls.start({
-                x: 0,
+                y: 0,
                 opacity: 1,
                 transition: {
-                    duration: 0.7,
+                    duration: 0.8,
                     ease: "easeOut"
                 }
             });
@@ -48,7 +48,7 @@ const LazyShow = ({ children }) => {
         <motion.div
             className="lazy-div"
             ref={rootRef}
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, y: 100 }}
             animate={controls}
         >
             {children}

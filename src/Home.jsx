@@ -58,6 +58,8 @@ import IconHolder from "./IconHolder";
 import { hedgehogScene, raccoonScene, squirrelScene } from "./scenes";
 import TestBG from './TestBG';
 import LazyShow from './LazyShow';
+import LazyShowY from './LazyShowY';
+// import FUNCTIONZ from './FUNCTION';
 
 
 const SLIDE_CHANGE_TIME_MS = 5000;
@@ -189,16 +191,22 @@ function AddTask() {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
+                        <LazyShow>
                             Add Task
+                            </LazyShow>
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
+                        <LazyShow>
                             Add your work, homework,<br />assignment and more!
+                            </LazyShow>
                         </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
                     <Button href="/Profile" size="small" color="primary">
+                    <LazyShow>
                         Go to task
+                        </LazyShow>
                     </Button>
                 </CardActions>
             </Card>
@@ -229,7 +237,27 @@ function Home() {
         width:'1668px',
         hieht: '2224px'  }}*/>
 
-            <h1><TestBG /></h1>
+            <h1><TestBG /><br /><Item style={{textAlign: "center"}}>_______________</Item></h1>
+            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'bold', fontSize: 80, fontFamily: 'Dosis'}} >
+            <LazyShowY>
+            FUNCTION 
+            </LazyShowY> 
+            </h2> <br />
+            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'bold', fontSize: 80, fontFamily: 'Dosis'}} >
+            <LazyShowY>
+            FUNCTION
+            </LazyShowY>
+            </h2> <br />
+            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'bold', fontSize: 80, fontFamily: 'Dosis'}} >
+            <LazyShowY>
+            FUNCTION
+            </LazyShowY>
+            </h2> <br />
+            <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'bold', fontSize: 80, fontFamily: 'Dosis'}} >
+            <LazyShowY>
+            FUNCTION
+            </LazyShowY>
+            </h2><br /><Item style={{textAlign: "center"}}>_______________</Item><br />
             <React.Fragment>
                 <CssBaseline />
                 <Container maxWidth="lg">
@@ -252,17 +280,25 @@ function Home() {
                                             />
                                             <CardContent>
                                                 <Typography gutterBottom variant="h5" component="div">
+                                                <LazyShow>
+                                                <h>
                                                     Alarm
+                                                    </h>
+                                                    </LazyShow>
                                                 </Typography>
                                                 <Typography variant="body2" color="text.secondary">
+                                                <LazyShow>
                                                     Reminders for all your work, homework,<br />and everything else you have.
+                                                    </LazyShow>
                                                 </Typography>
                                             </CardContent>
                                         </CardActionArea>
                                         <CardActions>
                                             <Button onclicksize="small" color="primary" variant="outline-primary"
                                                 onClick={handleClickOpen}>
+                                                <LazyShow>
                                                 Coming soon
+                                                </LazyShow>
                                             </Button>
                                             <Dialog
                                                 open={open}
@@ -297,16 +333,22 @@ function Home() {
                                             />
                                             <CardContent>
                                                 <Typography gutterBottom variant="h5" component="div">
+                                                <LazyShow>
                                                     Calender
+                                                    </LazyShow>
                                                 </Typography>
                                                 <Typography variant="body2" color="text.secondary">
+                                                <LazyShow>
                                                     Show your dates and tasks in a quick <br />and convenient format. And can be used more.
+                                                    </LazyShow>
                                                 </Typography>
                                             </CardContent>
                                         </CardActionArea>
                                         <CardActions>
                                             <Button href="/Calendar" size="small" color="primary" >
+                                            <LazyShow>
                                                 Go to calendar
+                                                </LazyShow>
                                             </Button>
                                         </CardActions>
                                     </Card>
@@ -324,16 +366,22 @@ function Home() {
                                             />
                                             <CardContent>
                                                 <Typography gutterBottom variant="h5" component="div">
+                                                <LazyShow>
                                                     About us
+                                                    </LazyShow>
                                                 </Typography>
                                                 <Typography variant="body2" color="text.secondary">
+                                                <LazyShow>
                                                     Get to know us and our web development team <br /> including IoT development department.
+                                                    </LazyShow>
                                                 </Typography>
                                             </CardContent>
                                         </CardActionArea>
                                         <CardActions>
                                             <Button size="small" color="primary">
+                                            <LazyShow>
                                                 Read more
+                                                </LazyShow>
                                             </Button>
                                         </CardActions>
                                     </Card>
