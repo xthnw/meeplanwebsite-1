@@ -4,6 +4,10 @@ import{Button} from"../Button";
 import'./Navbar.css';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import Avatar from '@mui/material/Avatar';
+import axios from 'axios';
+
+var token = localStorage.getItem("accessToken");
+var username = localStorage.getItem('user');
 
 class Navbar extends Component{
   state = { clicked: false }
@@ -11,7 +15,7 @@ class Navbar extends Component{
   handleClick = () => {
     this.setState({ clicked: !this.state.clicked})
   }
-
+    
 //backend เป็นกำลังใจให้นะ5555555555555555555555 คำว่า Home มันอยู่ในไหนอะะะะะะ หาไม่เจออsad ไปกินข้าวแพร้บบบบบบ kk
   render(){
     return(
@@ -28,17 +32,13 @@ class Navbar extends Component{
         
         
         <ul className={this.state.clicked ? 'nav-menu active': 'nav-menu'}>
-          {MenuItems.map((item,index)=>{
-            return(
+          {MenuItems.map((item,index)=>{                    return (
               <li key={index}>
                 <a className={item.cName} href={item.url}>
                   {item.title}
-                  
                 </a>
-                
               </li>
-            )
-            
+            );
           })}
         </ul>
         
@@ -48,7 +48,14 @@ class Navbar extends Component{
 }
 
 export default Navbar
-
+  // if (token){
+  //   document.getElementById("loginicon").innerHTML = username;
+  //   document.getElementById("loginicon").href = "/profile";
+  // }
+  // else{
+  //   document.getElementById("loginicon").innerHTML = "Login";
+  //   document.getElementById("loginicon").href = "/login";
+  // }
 
 
 // <img src="/src/Picture/Logo.png" href="/login" 

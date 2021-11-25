@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 async function loginUser(credentials) {
-  return fetch('https://www.mecallapi.com/api/login', {
+  return fetch('https://MeePlan101-backend.meeplan.repl.co/api/auth/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -52,19 +52,7 @@ async function loginUser(credentials) {
     body: JSON.stringify(credentials)
   })
     .then(data => data.json())
- }
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 
@@ -95,15 +83,16 @@ export default function SignIn() {
       username,
       password
     });
+    console.log(response)
     if ('accessToken' in response) {
-      swal("Success", response.message, "success", {
-        buttons: false,
-        timer: 2000,
-      })
+      swal("Success", response.message, "success")
       .then((value) => {
         localStorage.setItem('accessToken', response['accessToken']);
-        localStorage.setItem('user', JSON.stringify(response['user']));
+        localStorage.setItem('user', JSON.stringify(response['username']));
         window.location.href = "/profile";
+      })
+      .catch(error => {
+        swal("Failed", response.message, "error");
       });
     } else {
       swal("Failed", response.message, "error");
@@ -134,7 +123,8 @@ export default function SignIn() {
               required
               fullWidth
               id="username"
-              label="karn.yong@mecallapi.com"
+              // label="karn.yong@mecallapi.com"
+              label = "Username"
               name="username"
               autoComplete="username"
               autoFocus

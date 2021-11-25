@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect  } from 'react';
 import Navbar from "./components/Navbar/Navbar";
 import Navhome from "./components/Navhome/Navhome";
 import './App.css';
@@ -20,10 +20,10 @@ const SLIDE_CHANGE_TIME_MS = 5000;
 
 import CookieConsent, { Cookies } from "react-cookie-consent";
 
+// import { io } from "socket.io-client";
+// const socket = io("https://MeePlan101-backend.meeplan.repl.co");
 
 
-
-//ทำยังไงดีหละทีนี้เห้ออออ
 
 function App() {
     const [currentScene, setCurrentScene] = useCycle(

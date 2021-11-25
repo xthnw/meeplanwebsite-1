@@ -17,9 +17,12 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function Logout() {
     const token = localStorage.getItem("accessToken");
+    const user = localStorage.getItem("user");
+
 
     const handleLogout = () => {
         localStorage.removeItem("accessToken");
+        localStorage.removeItem("user");
         window.location.href = "https://meeplanwebsite-1.meeplan.repl.co/login";
     }
 

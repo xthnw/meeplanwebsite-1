@@ -13,17 +13,9 @@ import LockOpenRoundedIcon from '@mui/icons-material/LockOpenRounded';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
 
-
-
-
-
-
-
-
-
-
-
+//finish
 
 function Copyright(props: any) {
   return (
@@ -46,8 +38,22 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
-      email: data.get('email'),
+      username: data.get('username'),
       password: data.get('password'),
+      email: data.get('email')
+    });
+    axios.post('https://MeePlan101-backend.meeplan.repl.co/api/auth/signup', {
+      "username": data.get('username'),
+      "password": data.get('password'),
+      "email": data.get('email')
+    })
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+        window.location.href = '/Login';
+      })
+    .catch(error => {
+        alert(error);
     });
   };
 
@@ -84,25 +90,21 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
+              name="email"
+              label="Email"
+              type="email"
+              id="email"
+              autoComplete="email"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
               name="password"
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-              <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="wioid"
-              label="WIO Terminal ID"
-              type="number"
-              id="wioid"
-              autoComplete="wioid"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Link to your WIO Terminal?"
             />
             <Button
               type="submit"
@@ -114,7 +116,7 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="https://www.google.com" variant="body2">
+                <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
