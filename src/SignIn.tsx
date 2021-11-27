@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 async function loginUser(credentials) {
-  return fetch('https://MeePlan101-backend.meeplan.repl.co/api/auth/signin', {
+  return fetch('https://MeePlan101-backend.meeplan.repl.co/auth/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -89,7 +89,8 @@ export default function SignIn() {
       .then((value) => {
         localStorage.setItem('accessToken', response['accessToken']);
         localStorage.setItem('user', JSON.stringify(response['username']));
-        window.location.href = "/profile";
+        localStorage.setItem('email', JSON.stringify(response['email']));
+        window.location.href = "/profilen";
       })
       .catch(error => {
         swal("Failed", response.message, "error");
@@ -117,7 +118,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -135,7 +136,7 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label="mecallapi"
+              label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -156,7 +157,7 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="https://www.google.com" variant="body2">
+                <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>

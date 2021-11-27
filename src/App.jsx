@@ -10,6 +10,7 @@ import Login from './Login';
 import Signup from './SignUp';
 import Logout from './Logout';
 import Profile from './Profile';
+import Profilen from './Profilen';
 import { useCycle } from "framer-motion";
 
 import ImageHolder from "./ImageHolder";
@@ -47,7 +48,7 @@ function App() {
 
     return (
         <div>
-            <Navbar />
+            <Navbar sticky="top"/>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/Calendar" element={<Calendar />} />
@@ -55,6 +56,7 @@ function App() {
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/profilen" element={<Profilen />} />
             </Routes>
             <CookieConsent
                 style={{ background: '#ABB7F0' }}

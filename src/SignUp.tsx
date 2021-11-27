@@ -42,7 +42,7 @@ export default function SignIn() {
       password: data.get('password'),
       email: data.get('email')
     });
-    axios.post('https://MeePlan101-backend.meeplan.repl.co/api/auth/signup', {
+    axios.post('https://MeePlan101-backend.meeplan.repl.co/auth/signup', {
       "username": data.get('username'),
       "password": data.get('password'),
       "email": data.get('email')
@@ -75,7 +75,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Register
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required

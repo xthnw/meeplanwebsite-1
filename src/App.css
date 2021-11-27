@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   font-family: 'Dosis', sans-serif !important;
-  background-image: "./Picture/Bg.jpeg)" !important;
+  background-image: "./Picture/Bg.jpeg" !important;
 }
 
 .BG{
@@ -17,24 +17,27 @@
   width: 50px;
 }
 
-
-
+body{
+  background-image: url("./Picture/Bg.jpeg") !important;
+  background-size: 100% ;
+  background-attachment: fixed;
+}
 
 /*******************************
   Hero background
 ********************************/
 .hero {
   position: relative;
-
+  z-index: -1;
   display: flex;
   align-items: center;
   justify-content: center;
 
   height: 80vh;
   min-height: 35rem;
-  background-color: rgb(255, 253, 247);
+  //background-color: rgb(255, 253, 247);
 
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 /*******************************
@@ -42,18 +45,19 @@
 ********************************/
 .icon-holder {
   position: relative;
-  z-index: 1;
+  z-index: -1;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  background-color: rgba(255, 253, 247, 0.5);
+  //background-color: rgba(255, 253, 247, 0.5);
   box-shadow: 0 0 10px 10px rgba(255, 253, 247, 0.5);
   border-radius: 3rem;
   padding: 2rem;
   height: 19rem;
+  overflow: hidden !important;
 }
 
 .icon-holder__icon {
@@ -110,6 +114,7 @@
 @media screen and (max-width: 876px) {
   .hero {
     height: 70vh;
+    overflow: hidden !important;
   }
 
   /*******************************
@@ -119,12 +124,14 @@
     width: 100%;
     height: 100%;
     justify-content: flex-end;
+    overflow: hidden !important;
   }
 
   .icon-holder__icon {
     top: auto;
     bottom: 7rem;
     max-width: 10rem;
+    overflow: hidden !important;
   }
 
   /*******************************
@@ -133,10 +140,12 @@
   .animal-image__one {
     top: -5rem;
     width: 80vw;
+    overflow: hidden !important;
   }
 
   .animal-image__two {
     right: 0rem;
+    overflow: hidden !important;
   }
 
   .animal-image__three {
@@ -144,6 +153,7 @@
     bottom: auto;
     right: -5rem;
     width: 50vw;
+    overflow: hidden !important;
   }
 
   

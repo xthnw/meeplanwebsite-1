@@ -1,12 +1,12 @@
 import '/src/App.css';
 
 var token = localStorage.getItem("accessToken");
-var username = localStorage.getItem('user');
+const username = JSON. parse(localStorage.getItem('user'));
 
 if (token){
   var lastMenu = {
-    title: username,
-    url:'/profile',
+    title: "👩🏻‍💻" + username,
+    url:'/profilen',
     cName:'nav-links'
   }
   var logOut = {

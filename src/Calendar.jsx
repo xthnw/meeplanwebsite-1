@@ -40,17 +40,14 @@ import ColorLens from '@material-ui/icons/ColorLens';
 import { withStyles } from '@material-ui/core/styles';
 import { owners } from '/src/demo-data/tasks';
 
+var token = localStorage.getItem("accessToken");
+const username = JSON.parse(localStorage.getItem('user'));
+const email = JSON.parse(localStorage.getItem('email'));
 
-
-
-
-
-
-
-
-
-
-//เมษาาาาพวขอไอคอนใหญ่กว่านี้นิดนึงไดม้าาาแบบนิดเดียวอะให้มันบาล้านซ์หนายยยยไอ3ก้อนอ่ะ ใหญ่ขึ้นมะะเหมือนจะไม่555555อีกทีๆๆๆๆๆๆๆๆๆๆๆๆโอเคคคแต้งกิ้ว
+import { io } from "socket.io-client";
+const socket = io("https://MeePlan101-backend.meeplan.repl.co/?token="+token,{ 
+withCredentials: true
+});
 
 
 function Today() {
@@ -74,10 +71,11 @@ function Today() {
 
 
 function Alarm() {
+    const [modalShow, setModalShow] = React.useState(false);
     return (
         <div >
             <Card sx={{ maxWidth: 90 }}>
-                <CardActionArea>
+                <CardActionArea onClick={() => setModalShow(true)}>
                     <CardMedia
                         component="img"
                         height="90"
@@ -86,6 +84,10 @@ function Alarm() {
                     />
                 </CardActionArea>
             </Card>
+             <Alarmpopup
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
         </div>
 
     );
@@ -105,7 +107,7 @@ function AddTask() {
                     />
                 </CardActionArea>
             </Card>
-            <MyVerticallyCenteredModal
+            <Taskpopup
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />
@@ -114,7 +116,7 @@ function AddTask() {
 }
 
 
-function MyVerticallyCenteredModal(props) {
+function Taskpopup(props) {
     return (
         <Modal
             {...props}
@@ -123,13 +125,10 @@ function MyVerticallyCenteredModal(props) {
             centered
             className="Main"
         >
-            <Modal.Header closeButton className="Header">
+            <Modal.Header closeButton variant="white"  className="Header" >
                 <div >
-                    <img src="./src/Picture/Logo.png" style={{ width: '120px', height: '48px' }} />
+                    <img src="./src/Picture/Taskbar.png" style={{ width: '120px', height: '50px' }} />
                 </div>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Task
-                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -164,7 +163,7 @@ function MyVerticallyCenteredModal(props) {
                 <Form>
                     {['radio'].map((type) => (
                         <div key={`inline-${type}`} className="mb-3">
-                            <Form.Label>Level</Form.Label><tab />
+                            <Form.Label>Level</Form.Label>{" "}
                             <Form.Check
                                 inline
                                 label="1"
@@ -207,67 +206,43 @@ function MyVerticallyCenteredModal(props) {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button className="Button-Save" onClick={props.onHide}>Save</Button>
+                <Button variant="outline-secondary" className="Button-Save" onClick={props.onHide}>Save</Button>
             </Modal.Footer>
         </Modal>
     );
 }
 
-
-function Task() {
-    const [modalShow, setModalShow] = React.useState(false);
-
+function Alarmpopup(props) {
     return (
-        <div>
-            <Button variant="primary" className="Button-task" onClick={() => setModalShow(true)}>
-                + Task
-            </Button>
-
-            <MyVerticallyCenteredModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-            />
-        </div>
-    );
-}
-function Calendar() {
-    return (
-        <div>
-            <br />
-            <Container fluid="md">
-                <Row>
-                    <Col sm={4}>
-                        <Row>
-                            <h2 className="Nav-todo">To Do List</h2>
-                            <Form className="To-do">
-                                {['checkbox'].map((type) => (
-                                    <div key={`default-${type}`} className="mb-3">
-                                        <Form.Check type={type} id={`default-${type}`} label={`default ${type}`} />
-                                        <Form.Check type={type} id={`default-${type}`} label={`default ${type}`} />
-                                    </div>))}
-                            </Form>
-                        </Row>
+        <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            className="Main"
+        >
+            <Modal.Header closeButton className="Header">
+                <div >
+                    <img src="./src/Picture/Alarmbar.png" style={{ width: '120px', height: '50px' }} />
+                </div>
+            </Modal.Header>
+            <Modal.Body>
+                <Form>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control type="Text" />
+                    </Form.Group>
+                    <Form>
+                         <Form.Label>Time</Form.Label>
+                         <Form.Control placeholder="Time" type="Time" />
                         <br />
-                        <Row>
-                            <Col className="icon">
-                                <AddTask />
-                            </Col>
-                            <Col className="icon">
-                                <Alarm />
-                            </Col>
-                            <Col className="icon">
-                                <Today />
-                            </Col>
-                        </Row>
-                    </Col>
-                    <br />
-                    <Col sm={8}>
-                        <h2 className="calendar"></h2>
-                        <Demo />
-                    </Col>
-                </Row>
-            </Container>
-        </div>
+                    </Form>
+                </Form>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="outline-secondary" className="Button-Save" onClick={props.onHide}>Save</Button>
+            </Modal.Footer>
+        </Modal>
     );
 }
 
@@ -533,8 +508,7 @@ const AppointmentContent = withStyles(styles, { name: 'AppointmentContent' })(({
 const FlexibleSpace = withStyles(styles, { name: 'ToolbarRoot' })(({ classes, ...restProps }) => (
     <Toolbar.FlexibleSpace {...restProps} className={classes.flexibleSpace}>
         <div className={classes.flexContainer}>
-            <img className="photo" src="/src/Picture/IMG_4715.png" />
-            <Typography variant="h5" style={{ marginLeft: '10px' }}>Mee Plan</Typography>
+            <img className="photo" style = {{filter: "invert(1) grayscale(100%) brightness(200%)"}}src="/src/Picture/Logo.png" />
         </div>
     </Toolbar.FlexibleSpace>
 ));
@@ -618,5 +592,61 @@ class Demo extends React.PureComponent {
 }
 
 //render(<Calendar />);
+var taskall = []
 
+function Calendar() {
+    socket.on("connect_error", (err) => {
+    console.log(`connect_error due to ${err.message}`);
+    });
+    socket.on("update_setting",(err)=>{
+      socket.emit("list",{
+          "lwr": "2021-12-15",
+          "upr": "2021-12-18"
+      })
+    })
+    socket.on("list",(data) =>{
+      taskall = data.name
+      console.log(data)
+    })
+
+    return (
+        <div>
+            <br />
+            <Container fluid="md">
+                <Row>
+                    <Col sm={4}>
+                        <Row  className="ListAdjust" >
+                            <h2 className="Nav-todo">To Do List</h2>
+                            <Form className="To-do">
+                                {['checkbox'].map((type) => (
+                                    <div key={`default-${type}`} className="mb-3">
+                                        <Form.Check type={type} id={`default-${type}`} label={`default ${type}`} />
+                                        <Form.Check type={type} id={`default-${type}`} label={`default ${type}`} />
+                                    </div>))}
+                            </Form>
+                        </Row>
+                        <br />
+                        <Row className="ListAdjust2">
+                            <Col className="icon">
+                                <AddTask />
+                            </Col>
+                            <Col className="icon">
+                                <Alarm />
+                            </Col>
+                            <Col className="icon">
+                                <Today />
+                            </Col>
+                        </Row>
+                        <br />
+                    </Col>
+                    <br />
+                    <Col sm={8} >
+                        <Demo  />
+                    </Col>
+                </Row>
+            </Container>
+        </div>
+    );
+}
 export default Calendar;
+

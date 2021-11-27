@@ -1,0 +1,117 @@
+body{
+  font-family: 'Dosis', sans-serif !important;
+  color:#4f4e59;
+}
+
+.Id{
+  display: flex!important;
+  justify-content:left!important; 
+  left:5rem!important; 
+}
+
+.Page{
+  height: 50rem!important;
+}
+
+.Topic{
+  font-size: 20px;
+  background-color: rgba(245, 237, 164, 0)!important;
+}
+
+.Line{
+  width: 5rem!important;
+  background-color: rgb(245, 237, 164)!important;
+  color: #4f4e59!important;
+  display: flex!important;
+  justify-content:center!important; 
+  border: 0.5px solid #4f4e59!important;
+}
+
+.Line:hover{
+  width: 5rem!important;
+  background-color: #bde464!important;
+  color: #4f4e59!important;
+  display: flex!important;
+  justify-content:center!important; 
+  border: 0.5px solid #4f4e59!important;
+}
+
+.Edit{
+  width: 5rem!important;
+  background-color: rgb(245, 237, 164)!important;
+  color: #4f4e59!important;
+  display: flex!important;
+  justify-content:center!important; 
+}
+
+.Edit:hover{
+  width: 5rem!important;
+  background-color: rgb(216, 213, 175)!important;
+  color: #4f4e59!important;
+  display: flex!important;
+  justify-content:center!important; 
+}
+
+.Add{
+  width: 5rem!important;
+  background-color: rgb(245, 237, 164)!important;
+  color: #4f4e59!important;
+  display: flex!important;
+  justify-content:center!important; 
+}
+
+.SButton{
+  display: flex!important;
+  justify-content:right!important;
+  width: 50px;
+  position:relative;
+  left:-15px;
+}
+
+.AButton{
+  display: flex!important;
+  justify-content:right!important;
+  width: 50px;
+  position:relative;
+  left:-15px;
+}
+
+.Tags{
+  width: 40px;
+  justify-content:center!important;
+}
+
+#button-addon2{
+ width: 60px;
+ height: 40px!important;
+ display: flex!important;
+ background-color: rgb(245, 237, 164)!important;
+ color: #4f4e59;
+ justify-content:center!important;
+}
+
+#button-addon2:hover{
+ width: 60px;
+ display: flex!important;
+ background-color: #4f4e59!important;
+ color: aliceblue;
+ justify-content:center!important;
+}
+
+.MPic{
+  position: relative;
+  top: 200px;
+  width: 380px;
+  height: 400px;
+  display: flex!important;
+  justify-content:center!important;
+}
+
+@media screen and (max-width: 1030px){
+  .MPic{
+  position: relative;
+  top: 50px;
+  display: flex!important;
+  justify-content:center!important;
+}
+}
