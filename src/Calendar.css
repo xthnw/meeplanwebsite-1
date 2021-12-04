@@ -43,15 +43,14 @@
   font-family: 'Dosis', sans-serif !important;
   padding: 10px;
   border-radius: 5px;
-  background-color: aliceblue;
+  background-color: #eef0f7;
   height: 450px;
   align-items: center !important;
   width: 90% !important;
 }
 
 .icon{
-  align-items: center !important;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .calendar{
@@ -59,15 +58,18 @@
 }
 
 .ListAdjust{
-   display: flex!important;
-   justify-content:center!important; 
+  display: flex !important;
+  justify-content:center !important; 
 }
 
 .ListAdjust2{
-   display: grid!important;
-   grid-template-columns: repeat(3,auto);
-   grid-gap: 5% !important;
-   justify-content:center!important; 
+  width: 100%;
+  padding: 10px;
+  display: inline-flex !important;
+  /* grid-template-columns: repeat(3,auto); */
+  /* grid-gap: 5% !important; */
+  flex-direction: row ;
+  justify-content: space-between !important; 
 }
 
 .photo{
@@ -77,4 +79,161 @@
 
 #Cal{
   width: 100%;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.HorizontalAppointment-content-119{
+  color: #4f4e59 !important;
+}
+
+#allplan{
+	margin: 1.5rem;
+}
+
+.row1 {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#tododo{
+  justify-content: space-between !important;
+}
+
+.container-lg{
+  justify-content: space-between !important;
+}
+
+.checkboxOut-5{
+  background-color: rgb(252, 169, 189);
+  filter: brightness(110%);
+  /* border-radius: 0.2em; */
+  padding : 0.2rem;
+  border-radius: 3px 0px 0px 3px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0.5px 0.5px 1px #4f4e595b;
+}
+
+.checkboxOut-4{
+  background-color: rgb(248, 189, 166);
+  filter: brightness(110%);
+  /* border-radius: 0.2em; */
+  padding : 0.2rem;
+  border-radius: 3px 0px 0px 3px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0.5px 0.5px 1px #4f4e595b;
+}
+
+.checkboxOut-3{
+  background-color: rgb(250, 236, 174);
+  filter: brightness(110%);
+  /* border-radius: 0.2em; */
+  padding : 0.2rem;
+  border-radius: 3px 0px 0px 3px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0.5px 0.5px 1px #4f4e595b;
+}
+
+.checkboxOut-2{
+  background-color: rgb(216, 253, 195);
+  filter: brightness(110%);
+  /* border-radius: 0.2em; */
+  padding : 0.2rem;
+  border-radius: 3px 0px 0px 3px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0.5px 0.5px 1px #4f4e595b;
+}
+
+.checkboxOut-1{
+  background-color: rgb(241, 215, 252);
+  filter: brightness(110%);
+  /* border-radius: 0.2em; */
+  padding : 0.2rem;
+  border-radius: 3px 0px 0px 3px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0.5px 0.5px 1px #4f4e595b;
+}
+
+.labelOut-5{
+  background-color: rgb(252, 169, 189);
+  /* border-radius: 0.2em; */
+  margin-left: 0.1rem;
+  padding : 0.3rem;
+  width: 100%;
+  border-radius: 0px 3px 3px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0.5px 0.5px 1px #4f4e595b;
+}
+
+.labelOut-4{
+  background-color: rgb(248, 189, 166);
+  /* border-radius: 0.2em; */
+  margin-left: 0.1rem;
+  padding : 0.3rem;
+  width: 100%;
+  border-radius: 0px 3px 3px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0.5px 0.5px 1px #4f4e595b;
+}
+
+.labelOut-3{
+  background-color: rgb(250, 236, 174);
+  /* border-radius: 0.2em; */
+  margin-left: 0.1rem;
+  padding : 0.3rem;
+  width: 100%;
+  border-radius: 0px 3px 3px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0.5px 0.5px 1px #4f4e595b;
+}
+
+.labelOut-2{
+  background-color: rgb(216, 253, 195);
+  /* border-radius: 0.2em; */
+  margin-left: 0.1rem;
+  padding : 0.3rem;
+  width: 100%;
+  border-radius: 0px 3px 3px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0.5px 0.5px 1px #4f4e595b;
+}
+
+.labelOut-1{
+  background-color: rgb(241, 215, 252);
+  /* border-radius: 0.2em; */
+  margin-left: 0.1rem;
+  padding : 0.3rem;
+  width: 100%;
+  border-radius: 0px 3px 3px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0.5px 0.5px 1px #4f4e595b;
+}
+
+.boxOut{
+  display: flex;
+  width: 100%;
+}
+
+.cbochk{
+  opacity: 0.5;
+}
+
+.fa-edit:hover{
+  opacity: 0.5;
 }

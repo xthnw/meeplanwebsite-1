@@ -1,10 +1,14 @@
+
+import Logobar from '../Picture/Logobar.png'
+
+
 export const homeObjOne ={
   topline: 'Welcome to',
   headline: 'Mee Plan',
   description: 'สวัสดีทุกท่าน ขอต้อนรับทุกท่านเข้าสู่โลกของการมีแผนกับพวกเราชาว Mee Plan ที่จะทำให้การทำงานของทุกท่านมีความเป็นระเบียบมากยิ่งขึ้น',
   buttonLabel: 'Get Started',
   imgStart: '',
-  img: './src/Picture/Logobar.png',
+  img: Logobar,
   alt: 'Lets get a Plan'
 };
 
@@ -14,7 +18,7 @@ export const homeObjTwo ={
   description: '+ Todolist',
   buttonLabel: 'Log-in',
   imgStart: 'start',
-  img: './src/Picture/Logobar.png',
+  img: Logobar,
   alt: 'Function'
 };
 
@@ -24,7 +28,7 @@ export const homeObjThree ={
   description: '+ Todolist',
   buttonLabel: 'Log-in',
   imgStart: '',
-  img: './src/Picture/Logobar.png',
+  img: Logobar,
   alt: 'Function'
 };
 export const homeObjFour ={
@@ -33,6 +37,6 @@ export const homeObjFour ={
   description: '',
   buttonLabel: 'Log-in',
   imgStart: 'start',
-  img: './src/Picture/Logobar.png',
+  img: Logobar,
   alt: 'Function'
 };

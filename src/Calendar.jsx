@@ -37,6 +37,11 @@ import ColorLens from '@material-ui/icons/ColorLens';
 import { withStyles } from '@material-ui/core/styles';
 import { levels } from '/src/level-color/tasks';
 
+import Alarmbar from './Picture/Alarmbar.png';
+import AddTaskPic from './Picture/addtask.jpeg';
+import AddAlarmPic from './Picture/alarm.jpeg';
+import MeePic from './Picture/aMee.jpeg';
+
 var token = localStorage.getItem("accessToken");
 const username = JSON.parse(localStorage.getItem('user'));
 const email = JSON.parse(localStorage.getItem('email'));
@@ -56,7 +61,7 @@ function Today() {
                     <CardMedia
                         component="img"
                         height="90"
-                        image="/src/Picture/IMG_4723.jpeg"
+                        image={MeePic}
                         alt="Alarm"
                     />
                 </CardActionArea>
@@ -77,7 +82,7 @@ function Alarm() {
                     <CardMedia
                         component="img"
                         height="90"
-                        image="/src/Picture/IMG_4722.jpeg"
+                        image={AddAlarmPic}
                         alt="Alarm"
                     />
                 </CardActionArea>
@@ -100,7 +105,7 @@ function AddTask() {
                     <CardMedia
                         component="img"
                         height="90"
-                        image="/src/Picture/IMG_4721.jpeg"
+                        image={AddTaskPic}
                         alt="Add Task"
                     />
                 </CardActionArea>
@@ -113,8 +118,46 @@ function AddTask() {
     );
 }
 
+function EditTask(props) {
+    const [data, setData] = React.useState(props.task);
+    const [modalShow, setModalShow] = React.useState(false);
+    return (
+        <span>
+            <i className="far fa-edit" style = {{marginLeft : "1rem"}}
+            onClick = {() => {setModalShow(true)
+                //console.log(data)
+            }}></i>
+            <Taskpopup
+                show={modalShow}
+                onHide={() => setModalShow(false)
+                }
+                data = {data}
+            />
+        </span>
+    );
+}
+
 
 function Taskpopup(props) {
+    if (props.data && props.show){
+        var [data, setData] = React.useState(props.data)
+        console.log(data.name)
+    }
+    else if(props.show){
+      var [data, setData] = React.useState({
+        name : null,
+        date: null,
+        description: null,
+        done: null,
+        level: null
+      })
+    }
+    // useEffect(()=> {
+    //   if (props.data && props.show){
+    //         setData(props.data)
+    //   }
+    //   console.log(data)
+    // } ,[])
     var levelTask = 0;
     // var d = new Date();
     // var tzUTC = d.getTimezoneOffset()/60;
@@ -128,31 +171,32 @@ function Taskpopup(props) {
         alert("please select level");
       }
       else{
+        var dateTime = document.getElementById("taskDate").value +"T"+ document.getElementById("taskTime").value
         var newTask = {
           name: document.getElementById("taskName").value,
           description: document.getElementById("taskDescrpt").value,
           level: levelTask,
           done: false,
-          date: document.getElementById("taskDate").value
+          date: dateTime
         }
-        var dateTime = document.getElementById("taskDate").value +"T"+ document.getElementById("taskTime").value
         //console.log(dateTime)
         // console.log(document.getElementById("taskTime").value)
         // var changeUTC = dateTime.getHours()+tzUTC
         // dateTime.setHours(changeUTC)
-        var newTaskAlarm = {
-          "name" :  document.getElementById("taskName").value,
-          "date" : dateTime,
-          "description" : document.getElementById("taskDescrpt").value
+        if (document.getElementById("alarm-switch").checked == true){
+          var newTaskAlarm = {
+            "name" :  document.getElementById("taskName").value,
+            "date" : dateTime,
+            "description" : document.getElementById("taskDescrpt").value
+          }
+          // console.log(newTaskAlarm);
+          socket.emit("create_alarm",newTaskAlarm);
+          socket.emit("create", newTask);
         }
-        // console.log(newTaskAlarm);
-        socket.emit("create_alarm",newTaskAlarm);
-        socket.emit("create", newTask);
         props.onHide();
-        // console.log(newTask);
-        
       }
     }
+    if (props.show){
     return (
         <Modal
             {...props}
@@ -170,7 +214,7 @@ function Taskpopup(props) {
                 <Form>
                     <Form.Group className="mb-3">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control id = "taskName" type="Text" />
+                        <Form.Control id = "taskName" type="Text" defaultValue = {data.name} />
                     </Form.Group>
                     <Form.Group>
                         <Row>
@@ -183,17 +227,20 @@ function Taskpopup(props) {
                         </Row>
                         <Row>
                             <Col>
-                                <Form.Control id = "taskDate" type="Date" />
+                                <Form.Control id = "taskDate" type="Date"
+                                defaultValue = {data.date} />
                             </Col>
                             <Col>
-                                <Form.Control id = "taskTime" placeholder="Time" type="Time" />
+                                <Form.Control id = "taskTime" placeholder="Time" type="Time"
+                                />
                             </Col>
                         </Row>
                     </Form.Group>
                         <br />
                     <Form.Group className="mb-3" >
                         <Form.Label>Description</Form.Label>
-                        <Form.Control id = "taskDescrpt" as="textarea" rows={3} />
+                        <Form.Control id = "taskDescrpt"
+                        defaultValue = {data.description} as="textarea" rows={3} />
                     </Form.Group>
                 </Form>
                 <Form>
@@ -242,6 +289,11 @@ function Taskpopup(props) {
                             <Form.Label>most  important</Form.Label>{" "}
                         </div>
                     ))}
+                    <Form.Check 
+                      type="switch"
+                      id="alarm-switch"
+                      label="Alarm on Line & Wio Terminal"
+                    />
                 </Form>
             </Modal.Body>
             <Modal.Footer>
@@ -249,6 +301,8 @@ function Taskpopup(props) {
             </Modal.Footer>
         </Modal>
     );
+    }
+    else return(<span></span>)
 }
 
 function Alarmpopup(props) {
@@ -307,7 +361,7 @@ const styles = theme => ({
         userSelect: 'none',
         verticalAlign: 'top',
         padding: 0,
-        height: 100,
+        height: 90,
         borderLeft: getBorder(theme),
         '&:first-child': {
             borderLeft: 'none',
@@ -332,30 +386,30 @@ const styles = theme => ({
         width: '100%',
         height: '100%',
         position: 'absolute',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     text: {
         padding: '0.5em',
         textAlign: 'center',
     },
-    sun: {
-        color: '#FFEE58',
-    },
-    cloud: {
-        color: '#90A4AE',
-    },
-    rain: {
-        color: '#4FC3F7',
-    },
-    sunBack: {
-        backgroundColor: '#FFFDE7',
-    },
-    cloudBack: {
-        backgroundColor: '#ECEFF1',
-    },
-    rainBack: {
-        backgroundColor: '#E1F5FE',
-    },
+    // sun: {
+    //     color: '#FFEE58',
+    // },
+    // cloud: {
+    //     color: '#90A4AE',
+    // },
+    // rain: {
+    //     color: '#4FC3F7',
+    // },
+    // sunBack: {
+    //     backgroundColor: '#FFFDE7',
+    // },
+    // cloudBack: {
+    //     backgroundColor: '#ECEFF1',
+    // },
+    // rainBack: {
+    //     backgroundColor: '#E1F5FE',
+    // },
     opacity: {
         opacity: '0.5',
     },
@@ -486,128 +540,6 @@ const FlexibleSpace = withStyles(styles, { name: 'ToolbarRoot' })(({ classes, ..
     </Toolbar.FlexibleSpace>
 ));
 
-// class Demo extends React.PureComponent {
-    
-//     // #FOLD_BLOCK
-//     constructor(props) {
-//         super(props);
-        
-//         this.state = {
-//             appointments: {},
-//         };
-//         this.commitChanges = this.commitChanges.bind(this);
-//         console.log(this.state)
-//     }
-
-        
-//     // #FOLD_BLOCK
-//     commitChanges({ added, changed, deleted }) {
-//         this.setState((state) => {
-//             let { data } = state;
-//             if (added) {
-//                 // const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
-//                 // data = [...data, { id: startingAddedId, ...added }];
-//             }
-//             if (changed) {
-//                 // data = data.map(appointment => (
-//                 //     changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment));
-//             }
-//             if (deleted !== undefined) {
-//                 data = data.filter(appointment => appointment.id !== deleted);
-//                 socket.emit("delete",{"id" : deleted})
-//             }
-//             return { data };
-//         });
-//     }
-
-//     render() {
-//         const { data } = this.state;
-//         const todaydate = new Date();
-//         const bf2 = todaydate.getFullYear() - 2
-//         const af2 = todaydate.getFullYear() + 2
-        
-//         socket.on("update_setting",(err)=>{
-//         socket.emit("list",{
-//             "lwr": bf2.toString() + "-01-01",
-//             "upr": af2.toString() + "-01-01",
-//             "tag" : "appointment"
-//         })
-//       })
-//       socket.on("list",(data) =>{
-//         var endDate = 0
-//         var dateS = 0
-//         var dateget
-//       if (data.tag == "appointment"){
-//          this.setState ({ appointments : data.result.map((appointment, index)=> {
-//           //  console.log(appointment.date)
-//            dateS = new Date(appointment.date)
-//            dateget = dateS.getTime()
-//            endDate = dateS.setTime((dateget+12000))
-//            return({
-//             "id" : appointment._id,
-//             "title" : appointment.name,
-//             //description : appointment.description,
-//             "level": appointment.level,
-//             "startDate": new Date(appointment.date),
-//             "endDate": new Date(endDate)
-//             })
-//          })
-//          })
-//         //appointments = data.result
-//          //console.log(appointments)
-//       }
-//       // appointments.sort((a, b) => (a.level < b.level) ? 1 : (a.level === b.level) ? ((a.name > b.name) ? 1 : -1) : -1 )
-//         //console.log(appointments)
-//       })
-
-//         return (
-//             <Paper>
-//                 <Scheduler
-//                     data={appointments}
-//                 >
-//                     <EditingState
-//                          onCommitChanges={this.commitChanges}
-//                     />
-//                     <ViewState
-//                         defaultCurrentDate={todaydate}
-//                     />
-
-//                     <MonthView
-//                         timeTableCellComponent={TimeTableCell}
-//                         dayScaleCellComponent={DayScaleCell}
-//                     />
-
-//                     <Appointments
-//                         appointmentComponent={Appointment}
-//                         appointmentContentComponent={AppointmentContent}
-//                     />
-//                     <Resources
-//                         data={resources}
-//                     />
-
-//                     <Toolbar
-//                         flexibleSpaceComponent={FlexibleSpace}
-//                     />
-//                     <DateNavigator />
-
-//                     <EditRecurrenceMenu />
-//                     <AppointmentTooltip
-//                         showCloseButton
-//                         showDeleteButton
-//                         //showOpenButton
-//                     />
-//                     <AppointmentForm />
-//                     <DragDropProvider />
-//                 </Scheduler>
-//             </Paper>
-//         );
-//     }
-// }
-
-
-
-//render(<Calendar />);
-
 var taskAll = []
 
 function Calendar() {
@@ -630,10 +562,10 @@ function Calendar() {
       socket.on("list",(data) =>{
         if (data.tag == "todo"){
           taskAll = data.result
-          taskAll.sort((a, b) => (a.level < b.level) ? 1 : (a.level === b.level) ? ((a.name > b.name) ? 1 : -1) : -1 )
+          taskAll.sort((a, b) => (a.date > b.date) ? 1 : (a.date === b.date) ? ((a.level > b.level) ? 1 : -1) : -1 )
           // console.log(data.result)
         }
-      
+          
       })
 
       socket.on("update_setting",(err)=>{
@@ -665,18 +597,9 @@ function Calendar() {
             })
          })
          )
-        //appointments = data.result
-         //console.log(appointments)
       }
-      // appointments.sort((a, b) => (a.level < b.level) ? 1 : (a.level === b.level) ? ((a.name > b.name) ? 1 : -1) : -1 )
-        //console.log(appointments)
       })      
     })
-    // taskAll = appointments.slice()
-    // taskAll.sort((a, b) => (a.level < b.level) ? 1 : (a.level === b.level) ? ((a.name > b.name) ? 1 : -1) : -1 )
-    // console.log("task" + taskAll)
-
-    //<Demo arg = {appointments}/>
 
       
     const commitChanges = ({ added, changed, deleted }) => {
@@ -695,7 +618,7 @@ function Calendar() {
       }
 
     const handleCheck = (index,data) =>{
-        if (document.getElementById(`default-${index}`).checked == true ){
+        if (data.done == 0 ){
           socket.emit("edit",{
               "name": data.name,
               "description": data.description,
@@ -704,7 +627,10 @@ function Calendar() {
               "_id": data._id,
               "done": "1"
           })
+          document.getElementById(`default-${index}`).className = "far fa-check-square";
+          data.done = 1;
           console.log(data)
+          return { data }
         }
         else{
           socket.emit("edit",{
@@ -715,51 +641,86 @@ function Calendar() {
               "_id": data._id,
               "done": "0"
           })
+          document.getElementById(`default-${index}`).className = "far fa-square";
+          data.done = 0;
+          console.log(data)
+          return { data }
         }
     }
+
+    // const handleEdit = (index, item) =>{
+    //   //document.getElementById("taskName").value = item.name
+    //   console.log(item)
+    //   return (
+    //     <div>
+    //         <Taskpopup show="true"/>
+    //     </div>
+    //   );
+    // }
 
      return (
         <div>
             <br />
-            <Container fluid="md">
-                <Row>
-                    <Col sm={4}>
+            <Container fluid="lg">
+                <div className = "row1">
+                    <Col sm={4} id= "tododo">
                         <Row  className="ListAdjust" >
                             <h2 className="Nav-todo">To Do List</h2>
                             <Form className="To-do">
                                 {taskAll.map((item, index) => {
-                                  if (item.done === 0){
+                                  var dated = new Date(item.date).toLocaleDateString('en-GB')
+                                  if (item.done == 0){
                                   return (
-                                    <div key={`default-${index}`} className="mb-3">
-                                        <input type="checkbox" id={`default-${index}`} 
-                                        onChange = {()=> {handleCheck(index,item) }}/> {"  "}
+                                    <div key={`default-${index}`} className="mb-1 boxOut cbouchk">
+                                    <span className = {`checkboxOut-${item.level}`}>
+                                        <i className="far fa-square" id={`default-${index}`}
+                                        onClick = {()=> {handleCheck(index,item) }}
+                                         >
+                                         </i>
+                                    </span>
+                                          {"  "}
+                                    <div className = {`labelOut-${item.level}`}>
                                         <a>{item.name}</a>
+                                        <span className = "dateEnd">{dated}
+                                        <EditTask task = {item} />
+                                        </span>
+                                    </div>
                                     </div>)
                                   }
                                   else{
                                     return (
-                                    <div key={`default-${index}`} className="mb-3">
-                                        <input type="checkbox" id={`default-${index}`} 
-                                        onChange = {()=> {handleCheck(index,item) }}
-                                        checked /> {"  "}
+                                    <div key={`default-${index}`} className="mb-1 boxOut cbochk">
+                                      <span className = {`checkboxOut-${item.level}`}>
+                                        <i className="far fa-check-square" id={`default-${index}`}
+                                        onClick = {()=> {handleCheck(index,item) }}
+                                         >
+                                         </i> 
+                                      </span>
+                                         {"  "}
+                                     <div className = {`labelOut-${item.level}`}>
                                         <a>{item.name}</a>
+                                        <span className = "dateEnd">{dated}
+                                        <EditTask task = {item} />
+                                        </span>
+                                     </div>
+
                                     </div>)
                                   }
                                     })}
                             </Form>
                         </Row>
                         <br />
-                        <Row className="ListAdjust2">
-                            <Col className="icon">
+                        <div className="ListAdjust2">
+                            <div className="icon">
                                 <AddTask />
-                            </Col>
-                            <Col className="icon">
+                            </div>
+                            <div className="icon">
                                 <Alarm />
-                            </Col>
-                            <Col className="icon">
+                            </div>
+                            <div className="icon">
                                 <Today />
-                            </Col>
-                        </Row>
+                            </div>
+                        </div>
                         <br />
                     </Col>
                     <br />
@@ -805,10 +766,11 @@ function Calendar() {
                       </Paper>
                       </div>
                     </Col>
-                </Row>
+                </div>
             </Container>
         </div>
     );
 }
 export default Calendar;
+
 

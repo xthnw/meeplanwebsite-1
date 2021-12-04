@@ -22,7 +22,7 @@ import IconHolder from "./IconHolder";
 import { hedgehogScene, raccoonScene, squirrelScene } from "./scenes";
 const SLIDE_CHANGE_TIME_MS = 5000;
 
-import CookieConsent, { Cookies } from "react-cookie-consent";
+
 
 // import { io } from "socket.io-client";
 // const socket = io("https://MeePlan101-backend.meeplan.repl.co");
@@ -70,13 +70,7 @@ function App() {
                 <Route path="/profilen" element={<Profilen />} />
                 <Route path="/notify" element={<Notify />} />
             </Routes>
-            <CookieConsent
-                style={{ background: '#ABB7F0' }}
-                enableDeclineButton
-                onDecline={() => {
-                    alert("bruh!");
-                }}
-            >Our website uses cookies to improve your experience, By clicking “I Understand”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts. </CookieConsent>
+            
         </div>
     )
 }

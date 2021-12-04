@@ -22,7 +22,7 @@ var App = React.createClass({
     render: function () {
         return <FormGroup>
             <ControlLabel>Label</ControlLabel>
-            <DatePicker id="example-datepicker" value={this.state.value} onChange={this.handleChange} />
+            <DatePicker id="datepicker" value={this.state.value} onChange={this.handleChange} />
             <HelpBlock>Help</HelpBlock>
         </FormGroup>;
     }

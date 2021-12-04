@@ -6,6 +6,8 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import Avatar from '@mui/material/Avatar';
 import axios from 'axios';
 
+import Logo from '../../Picture/Logo.png';
+
 var token = localStorage.getItem("accessToken");
 var username = localStorage.getItem('user');
 
@@ -16,13 +18,13 @@ class Navbar extends Component{
     this.setState({ clicked: !this.state.clicked})
   }
     
-//backend เป็นกำลังใจให้นะ5555555555555555555555 คำว่า Home มันอยู่ในไหนอะะะะะะ หาไม่เจออsad ไปกินข้าวแพร้บบบบบบ kk
+
   render(){
     return(
       <nav className = "NavbarItems">
         <div className = "Logo">
           <a href="https://meeplanwebsite-1.meeplan.repl.co/">
-            <img src="/src/Picture/Logo.png" style={{width:'180px',height: '68px'}} />
+            <img src={Logo} style={{width:'180px',height: '68px'}} />
           </a>
         </div>
         
