@@ -1,0 +1,23 @@
+.Bar{
+  color: #4f4e59;
+  border-radius: 5px;
+  padding: 1rem 5px;
+  display: flex;
+  align-items: center;
+}
+
+.Button-Save{
+   background-color: #4f4e59!important;
+   color:aliceblue!important;
+   outline-color: 1px solid #4f4e59!important;
+   width: 80px;
+   height: 40px;
+}
+
+.Button-Save:hover{
+   background-color: rgb(245, 237, 164)!important;
+   color: #4f4e59!important;
+   outline-color: 1px solid #4f4e59!important;
+   width: 80px;
+}
+

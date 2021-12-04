@@ -5,7 +5,7 @@ const username = JSON. parse(localStorage.getItem('user'));
 
 if (token){
   var lastMenu = {
-    title: "👩🏻‍💻" + username,
+    title: "👩🏻‍💻 " + username,
     url:'/profilen',
     cName:'nav-links'
   }
@@ -27,7 +27,7 @@ else{
 
 export const MenuItems =[
   {
-    title:'Calendar',
+    title:'📅 Calendar',
     url:'/Calendar',
     cName:'nav-links'
   },

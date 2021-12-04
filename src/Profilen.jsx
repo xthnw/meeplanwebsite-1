@@ -2,10 +2,12 @@ import * as React from 'react';
 import { Modal, Button, Form, CloseButton, Row, Col, Container, FormControl, InputGroup} from 'react-bootstrap';
 import './Profilen.css';
 import ReactDOM from 'react-dom';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { io } from "socket.io-client";
+import { io } from 'socket.io-client';
 import swal from 'sweetalert';
+import qs from 'qs';
+import axios from 'axios';
 
 var token = localStorage.getItem("accessToken");
 const username = JSON.parse(localStorage.getItem('user'));
@@ -19,22 +21,18 @@ var wioall = []
 
 
 function Profilen (){
-  socket.on("connect_error", (err) => {
-  console.log(`connect_error due to ${err.message}`);
-  });
-  socket.on("update_setting",(err)=>{
-    socket.emit("list_iot_id",{})
+  useEffect(()=>{
+    socket.on("connect_error", (err) => {
+    console.log(`connect_error due to ${err.message}`);
+    });
+    socket.on("update_setting",(err)=>{
+      socket.emit("list_iot_id",{})
+    })
+    socket.on("list_iot_id",(data) =>{
+      wioall = data.iot_id
+    })
   })
-  socket.on("list_iot_id",(data) =>{
-    //console.log(data.data.toString())
-    wioall = data.iot_id
-    //document.getElementById('wio_1').value = wioall[0].toString() + "";
-    //console.log(wioall)
-  })
-  //change current wio box to display all id
-  //then add another input with add button or delete button as it might be easier
-  
-    const handleDelete = (index) => {
+  const handleDelete = (index) => {
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this id!",
@@ -52,7 +50,6 @@ function Profilen (){
         });
   } 
   else {
-    swal("cancel");
   }
   })
   }
@@ -72,13 +69,37 @@ function Profilen (){
             icon: "success",
           });
     } 
-    else {
-      swal("cancel");
-    }
     })
     }
 
-  
+  const redirectLine = ()=>{
+      const queryObj = {
+        response_type: 'code',
+        client_id: 'pYTmD4zxeWsUfbkI03jK2g',
+        redirect_uri: 'https://meeplanwebsite-1.meeplan.repl.co/notify',
+        scope:'notify',
+        state: token
+      };
+      const url = 'https://notify-bot.line.me/oauth/authorize?' + qs.stringify(queryObj);
+      console.log(url);
+      window.location.assign(url);
+  }
+  const revokeLine = ()=>{
+    var params = {
+      "token" : token
+    }
+    const config = {
+      headers: { 
+        'Content-Type': 'application/json'
+      }
+    }
+    axios.post('https://MeePlan101-backend.meeplan.repl.co/notify/revoke', params, config)
+      .then(res => {
+        swal('Line disconnected.')
+      }).catch(err=>{
+        swal('Please connect Line first.')
+      })
+  };
 
   if (!token) {
         return <Login />
@@ -112,10 +133,19 @@ function Profilen (){
             <br />
             <Row>
                <Col sm={4} className="Id">
-               <p className="Topic">Line Notification</p>
+               <p className="Topic">Line Notify</p>
                </Col>
                <Col sm={6}>
-               <Button href="#" className="Line" disabled >💬</Button> 
+               <Button href="#" className="Line" onClick = {() => redirectLine()}>Connect</Button> 
+               </Col>
+            </Row>
+            <br />
+            <Row>
+              <Col sm={4} className="Id">
+               <p className="Topic"></p>
+               </Col>
+              <Col sm={6}>
+               <Button href="#" className="LineDisconnect" onClick = {() => revokeLine()}>Disconnect</Button> 
                </Col>
             </Row>
             <br />
@@ -128,11 +158,10 @@ function Profilen (){
                     var idindex = "id" + index
                     var btnindex = "del" + index
                 return (
-                  <form>
+                  <li  key = {index} style = {{listStyle:'none', padding: 0,margin: 0}}>
                   <InputGroup className="mb-3"> 
                   <InputGroup.Text className="Tags" >{index+1}</InputGroup.Text>
                      <FormControl 
-                      keys = {index}
                       className = "wio_id"
                       id = {idindex}
                       aria-label="Default"
@@ -142,12 +171,11 @@ function Profilen (){
                     />
                     <Button variant="outline-secondary" className={btnindex} 
                     id="button-addon2"
-                    keys = {index}
                     onClick = {() => handleDelete(index)}
                     >Delete
                     </Button>
                   </InputGroup>
-                  </form>
+                  </li>
                     );
                   })}
                   <InputGroup className="mb-3"> 
@@ -155,6 +183,7 @@ function Profilen (){
                       id = "wioIdAdd"
                       aria-label="Default"
                       aria-describedby="inputGroup-sizing-default"
+                      maxLength= "6"
                     />
                     <Button variant="outline-secondary" id="button-addon2" className="DButton"
                     onClick = {handleAdd}>Add
@@ -168,7 +197,7 @@ function Profilen (){
         </Col >
         <Col className="MPic">
         <br />
-        <img src='../src/Picture/Bear.png' />
+        <img className="Pic" src='../src/Picture/Bear.png' />
         </Col>
       </Row>
     </Container>

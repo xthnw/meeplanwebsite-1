@@ -1,21 +1,28 @@
 :root{
-  --primary: #c3edfa;
+  --primary: #4f4e59;
 }
 .btn{
   padding: 7px 20px;
   border-radius: 4px;
+  width: 115px;
+  height: 40px;
   outline: none;
   border: none;
   cursor: pointer;
   font-family: 'Dosis', sans-serif !important;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
+  background: #4f4e59 !important;
+  color:rgb(243, 242, 199) !important;
 }
 
 .btn:hover{
   padding: 7px 20px;
+  border-radius: 4px;
+  width: 115px;
+  height: 40px;
   transition: all 0.3s ease-out;
-  background: rgb(243, 242, 199);
-  color:rgb(39, 38, 41);
+  background: rgb(243, 242, 199)!important;
+  color:#4f4e59!important;
   /* transition: 250ms; */
 }
 

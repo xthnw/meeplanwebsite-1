@@ -1,15 +1,13 @@
 // import React, { Component } from 'react';
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import Navbar from "./components/Navbar/Navbar";
 import './Calendar.css';
 import { Modal, Button, Form, CloseButton, Row, Col, Container } from 'react-bootstrap';
 import './App.css';
 //import { render } from 'react-dom';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -33,12 +31,11 @@ import {
     Resources,
     DragDropProvider,
 } from '@devexpress/dx-react-scheduler-material-ui';
-import WbSunny from '@material-ui/icons/WbSunny';
 import FilterDrama from '@material-ui/icons/FilterDrama';
 import Opacity from '@material-ui/icons/Opacity';
 import ColorLens from '@material-ui/icons/ColorLens';
 import { withStyles } from '@material-ui/core/styles';
-import { owners } from '/src/demo-data/tasks';
+import { levels } from '/src/level-color/tasks';
 
 var token = localStorage.getItem("accessToken");
 const username = JSON.parse(localStorage.getItem('user'));
@@ -48,6 +45,7 @@ import { io } from "socket.io-client";
 const socket = io("https://MeePlan101-backend.meeplan.repl.co/?token="+token,{ 
 withCredentials: true
 });
+
 
 
 function Today() {
@@ -117,6 +115,44 @@ function AddTask() {
 
 
 function Taskpopup(props) {
+    var levelTask = 0;
+    // var d = new Date();
+    // var tzUTC = d.getTimezoneOffset()/60;
+    const handleTask = () => {
+      for (let i = 1; i<= 5;i++ ){
+        if (document.getElementById("inline-radio-"+i).checked == true){
+          levelTask = i;
+        }
+      }
+      if (levelTask == 0){
+        alert("please select level");
+      }
+      else{
+        var newTask = {
+          name: document.getElementById("taskName").value,
+          description: document.getElementById("taskDescrpt").value,
+          level: levelTask,
+          done: false,
+          date: document.getElementById("taskDate").value
+        }
+        var dateTime = document.getElementById("taskDate").value +"T"+ document.getElementById("taskTime").value
+        //console.log(dateTime)
+        // console.log(document.getElementById("taskTime").value)
+        // var changeUTC = dateTime.getHours()+tzUTC
+        // dateTime.setHours(changeUTC)
+        var newTaskAlarm = {
+          "name" :  document.getElementById("taskName").value,
+          "date" : dateTime,
+          "description" : document.getElementById("taskDescrpt").value
+        }
+        // console.log(newTaskAlarm);
+        socket.emit("create_alarm",newTaskAlarm);
+        socket.emit("create", newTask);
+        props.onHide();
+        // console.log(newTask);
+        
+      }
+    }
     return (
         <Modal
             {...props}
@@ -132,11 +168,11 @@ function Taskpopup(props) {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Group className="mb-3">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="Text" />
+                        <Form.Control id = "taskName" type="Text" />
                     </Form.Group>
-                    <Form>
+                    <Form.Group>
                         <Row>
                             <Col>
                                 <Form.Label>Date</Form.Label>
@@ -147,23 +183,25 @@ function Taskpopup(props) {
                         </Row>
                         <Row>
                             <Col>
-                                <Form.Control type="Date" />
+                                <Form.Control id = "taskDate" type="Date" />
                             </Col>
                             <Col>
-                                <Form.Control placeholder="Time" type="Time" />
+                                <Form.Control id = "taskTime" placeholder="Time" type="Time" />
                             </Col>
                         </Row>
+                    </Form.Group>
                         <br />
-                    </Form>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Group className="mb-3" >
                         <Form.Label>Description</Form.Label>
-                        <Form.Control as="textarea" rows={3} />
+                        <Form.Control id = "taskDescrpt" as="textarea" rows={3} />
                     </Form.Group>
                 </Form>
                 <Form>
                     {['radio'].map((type) => (
                         <div key={`inline-${type}`} className="mb-3">
                             <Form.Label>Level</Form.Label>{" "}
+                            <br />
+                            <Form.Label>least important</Form.Label>{" "}
                             <Form.Check
                                 inline
                                 label="1"
@@ -171,6 +209,7 @@ function Taskpopup(props) {
                                 type={type}
                                 id={`inline-${type}-1`}
                                 style={{ marginLeft: '1rem' }}
+                                
                             />
                             <Form.Check
                                 inline
@@ -200,13 +239,13 @@ function Taskpopup(props) {
                                 type={type}
                                 id={`inline-${type}-5`}
                             />
-
+                            <Form.Label>most  important</Form.Label>{" "}
                         </div>
                     ))}
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="outline-secondary" className="Button-Save" onClick={props.onHide}>Save</Button>
+                <Button variant="outline-secondary" className="Button-Save" onClick={handleTask}>Save</Button>
             </Modal.Footer>
         </Modal>
     );
@@ -228,15 +267,15 @@ function Alarmpopup(props) {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Group className="mb-3">
                         <Form.Label>Title</Form.Label>
                         <Form.Control type="Text" />
                     </Form.Group>
-                    <Form>
+                    <Form.Group className="mb-3">
                          <Form.Label>Time</Form.Label>
                          <Form.Control placeholder="Time" type="Time" />
                         <br />
-                    </Form>
+                    </Form.Group>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
@@ -246,74 +285,10 @@ function Alarmpopup(props) {
     );
 }
 
-const appointments = [
-    {
-        id: 0,
-        title: 'Watercolor Landscape',
-        startDate: new Date(2018, 6, 23, 9, 30),
-        endDate: new Date(2018, 6, 23, 11, 30),
-        ownerId: 1,
-    }, {
-        id: 1,
-        title: 'Monthly Planning',
-        startDate: new Date(2018, 5, 28, 9, 30),
-        endDate: new Date(2018, 5, 28, 11, 30),
-        ownerId: 1,
-    }, {
-        id: 2,
-        title: 'Recruiting students',
-        startDate: new Date(2018, 6, 9, 12, 0),
-        endDate: new Date(2018, 6, 9, 13, 0),
-        ownerId: 2,
-    }, {
-        id: 3,
-        title: 'Oil Painting',
-        startDate: new Date(2018, 6, 18, 14, 30),
-        endDate: new Date(2018, 6, 18, 15, 30),
-        ownerId: 2,
-    }, {
-        id: 4,
-        title: 'Open Day',
-        startDate: new Date(2018, 6, 20, 12, 0),
-        endDate: new Date(2018, 6, 20, 13, 35),
-        ownerId: 6,
-    }, {
-        id: 5,
-        title: 'Watercolor Landscape',
-        startDate: new Date(2018, 6, 6, 13, 0),
-        endDate: new Date(2018, 6, 6, 14, 0),
-        rRule: 'FREQ=WEEKLY;BYDAY=FR;UNTIL=20180816',
-        exDate: '20180713T100000Z,20180727T100000Z',
-        ownerId: 2,
-    }, {
-        id: 6,
-        title: 'Meeting of Instructors',
-        startDate: new Date(2018, 5, 28, 12, 0),
-        endDate: new Date(2018, 5, 28, 12, 30),
-        rRule: 'FREQ=WEEKLY;BYDAY=TH;UNTIL=20180727',
-        exDate: '20180705T090000Z,20180719T090000Z',
-        ownerId: 5,
-    }, {
-        id: 7,
-        title: 'Oil Painting for Beginners',
-        startDate: new Date(2018, 6, 3, 11, 0),
-        endDate: new Date(2018, 6, 3, 12, 0),
-        rRule: 'FREQ=WEEKLY;BYDAY=TU;UNTIL=20180801',
-        exDate: '20180710T080000Z,20180724T080000Z',
-        ownerId: 3,
-    }, {
-        id: 8,
-        title: 'Watercolor Workshop',
-        startDate: new Date(2018, 6, 9, 11, 0),
-        endDate: new Date(2018, 6, 9, 12, 0),
-        ownerId: 3,
-    },
-];
-
 const resources = [{
-    fieldName: 'ownerId',
-    title: 'Owners',
-    instances: owners,
+    fieldName: "level",
+    title: 'Level',
+    instances: levels,
 }];
 
 const getBorder = theme => (`1px solid ${theme.palette.type === 'light'
@@ -445,18 +420,18 @@ const styles = theme => ({
     },
 });
 
-const WeatherIcon = ({ classes, id }) => {
-    switch (id) {
-        case 0:
-            return <Opacity className={classes.rain} fontSize="large" />;
-        case 1:
-            return <WbSunny className={classes.sun} fontSize="large" />;
-        case 2:
-            return <FilterDrama className={classes.cloud} fontSize="large" />;
-        default:
-            return null;
-    }
-};
+// const WeatherIcon = ({ classes, id }) => {
+//     switch (id) {
+//         case 0:
+//             return <Opacity className={classes.rain} fontSize="large" />;
+//         case 1:
+//             return <WbSunny className={classes.sun} fontSize="large" />;
+//         case 2:
+//             return <FilterDrama className={classes.cloud} fontSize="large" />;
+//         default:
+//             return null;
+//     }
+// };
 
 // #FOLD_BLOCK
 const CellBase = React.memo(({
@@ -466,7 +441,7 @@ const CellBase = React.memo(({
     otherMonth,
     // #FOLD_BLOCK
 }) => {
-    const iconId = Math.abs(Math.floor(Math.sin(startDate.getDate()) * 10) % 3);
+    //const iconId = Math.abs(Math.floor(Math.sin(startDate.getDate()) * 10) % 3);
     const isFirstMonthDay = startDate.getDate() === 1;
     const formatOptions = isFirstMonthDay
         ? { day: 'numeric', month: 'long' }
@@ -476,15 +451,13 @@ const CellBase = React.memo(({
             tabIndex={0}
             className={classNames({
                 [classes.cell]: true,
-                [classes.rainBack]: iconId === 0,
-                [classes.sunBack]: iconId === 1,
-                [classes.cloudBack]: iconId === 2,
+                //[classes.rainBack]: iconId === 0,
+                //[classes.sunBack]: iconId === 1,
+                //[classes.cloudBack]: iconId === 2,
                 [classes.opacity]: otherMonth,
             })}
         >
-            <div className={classes.content}>
-                <WeatherIcon classes={classes} id={iconId} />
-            </div>
+            
             <div className={classes.text}>
                 {formatDate(startDate, formatOptions)}
             </div>
@@ -513,103 +486,239 @@ const FlexibleSpace = withStyles(styles, { name: 'ToolbarRoot' })(({ classes, ..
     </Toolbar.FlexibleSpace>
 ));
 
-class Demo extends React.PureComponent {
-    // #FOLD_BLOCK
-    constructor(props) {
-        super(props);
+// class Demo extends React.PureComponent {
+    
+//     // #FOLD_BLOCK
+//     constructor(props) {
+//         super(props);
+        
+//         this.state = {
+//             appointments: {},
+//         };
+//         this.commitChanges = this.commitChanges.bind(this);
+//         console.log(this.state)
+//     }
 
-        this.state = {
-            data: appointments,
-        };
+        
+//     // #FOLD_BLOCK
+//     commitChanges({ added, changed, deleted }) {
+//         this.setState((state) => {
+//             let { data } = state;
+//             if (added) {
+//                 // const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
+//                 // data = [...data, { id: startingAddedId, ...added }];
+//             }
+//             if (changed) {
+//                 // data = data.map(appointment => (
+//                 //     changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment));
+//             }
+//             if (deleted !== undefined) {
+//                 data = data.filter(appointment => appointment.id !== deleted);
+//                 socket.emit("delete",{"id" : deleted})
+//             }
+//             return { data };
+//         });
+//     }
 
-        this.commitChanges = this.commitChanges.bind(this);
-    }
+//     render() {
+//         const { data } = this.state;
+//         const todaydate = new Date();
+//         const bf2 = todaydate.getFullYear() - 2
+//         const af2 = todaydate.getFullYear() + 2
+        
+//         socket.on("update_setting",(err)=>{
+//         socket.emit("list",{
+//             "lwr": bf2.toString() + "-01-01",
+//             "upr": af2.toString() + "-01-01",
+//             "tag" : "appointment"
+//         })
+//       })
+//       socket.on("list",(data) =>{
+//         var endDate = 0
+//         var dateS = 0
+//         var dateget
+//       if (data.tag == "appointment"){
+//          this.setState ({ appointments : data.result.map((appointment, index)=> {
+//           //  console.log(appointment.date)
+//            dateS = new Date(appointment.date)
+//            dateget = dateS.getTime()
+//            endDate = dateS.setTime((dateget+12000))
+//            return({
+//             "id" : appointment._id,
+//             "title" : appointment.name,
+//             //description : appointment.description,
+//             "level": appointment.level,
+//             "startDate": new Date(appointment.date),
+//             "endDate": new Date(endDate)
+//             })
+//          })
+//          })
+//         //appointments = data.result
+//          //console.log(appointments)
+//       }
+//       // appointments.sort((a, b) => (a.level < b.level) ? 1 : (a.level === b.level) ? ((a.name > b.name) ? 1 : -1) : -1 )
+//         //console.log(appointments)
+//       })
 
-    // #FOLD_BLOCK
-    commitChanges({ added, changed, deleted }) {
-        this.setState((state) => {
-            let { data } = state;
-            if (added) {
-                const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
-                data = [...data, { id: startingAddedId, ...added }];
-            }
-            if (changed) {
-                data = data.map(appointment => (
-                    changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment));
-            }
-            if (deleted !== undefined) {
-                data = data.filter(appointment => appointment.id !== deleted);
-            }
-            return { data };
-        });
-    }
+//         return (
+//             <Paper>
+//                 <Scheduler
+//                     data={appointments}
+//                 >
+//                     <EditingState
+//                          onCommitChanges={this.commitChanges}
+//                     />
+//                     <ViewState
+//                         defaultCurrentDate={todaydate}
+//                     />
 
-    render() {
-        const { data } = this.state;
+//                     <MonthView
+//                         timeTableCellComponent={TimeTableCell}
+//                         dayScaleCellComponent={DayScaleCell}
+//                     />
 
-        return (
-            <Paper>
-                <Scheduler
-                    data={data}
-                >
-                    <EditingState
-                        onCommitChanges={this.commitChanges}
-                    />
-                    <ViewState
-                        defaultCurrentDate="2018-07-17"
-                    />
+//                     <Appointments
+//                         appointmentComponent={Appointment}
+//                         appointmentContentComponent={AppointmentContent}
+//                     />
+//                     <Resources
+//                         data={resources}
+//                     />
 
-                    <MonthView
-                        timeTableCellComponent={TimeTableCell}
-                        dayScaleCellComponent={DayScaleCell}
-                    />
+//                     <Toolbar
+//                         flexibleSpaceComponent={FlexibleSpace}
+//                     />
+//                     <DateNavigator />
 
-                    <Appointments
-                        appointmentComponent={Appointment}
-                        appointmentContentComponent={AppointmentContent}
-                    />
-                    <Resources
-                        data={resources}
-                    />
+//                     <EditRecurrenceMenu />
+//                     <AppointmentTooltip
+//                         showCloseButton
+//                         showDeleteButton
+//                         //showOpenButton
+//                     />
+//                     <AppointmentForm />
+//                     <DragDropProvider />
+//                 </Scheduler>
+//             </Paper>
+//         );
+//     }
+// }
 
-                    <Toolbar
-                        flexibleSpaceComponent={FlexibleSpace}
-                    />
-                    <DateNavigator />
 
-                    <EditRecurrenceMenu />
-                    <AppointmentTooltip
-                        showCloseButton
-                        showDeleteButton
-                        showOpenButton
-                    />
-                    <AppointmentForm />
-                    <DragDropProvider />
-                </Scheduler>
-            </Paper>
-        );
-    }
-}
 
 //render(<Calendar />);
-var taskall = []
+
+var taskAll = []
 
 function Calendar() {
-    socket.on("connect_error", (err) => {
-    console.log(`connect_error due to ${err.message}`);
-    });
-    socket.on("update_setting",(err)=>{
-      socket.emit("list",{
-          "lwr": "2021-12-15",
-          "upr": "2021-12-18"
+    var [appointments, setappointments] = useState([])
+    const todaydate = new Date();
+    var date7 = new Date();
+    var s = date7.getDate()+7
+    date7.setDate(s)
+    useEffect(()=>{
+      socket.on("connect_error", (err) => {
+      console.log(`connect_error due to ${err.message}`);
+      });
+      socket.on("update_setting",(err)=>{
+        socket.emit("list",{
+            "lwr": new Date(),
+            "upr": date7,
+            "tag" : "todo"
+        })
       })
-    })
-    socket.on("list",(data) =>{
-      taskall = data.name
-      console.log(data)
-    })
+      socket.on("list",(data) =>{
+        if (data.tag == "todo"){
+          taskAll = data.result
+          taskAll.sort((a, b) => (a.level < b.level) ? 1 : (a.level === b.level) ? ((a.name > b.name) ? 1 : -1) : -1 )
+          // console.log(data.result)
+        }
+      
+      })
 
-    return (
+      socket.on("update_setting",(err)=>{
+        var bf2 = todaydate.getFullYear() - 2
+        var af2 = todaydate.getFullYear() + 2
+        socket.emit("list",{
+            "lwr": bf2.toString() + "-01-01",
+            "upr": af2.toString() + "-01-01",
+            "tag" : "appointment"
+        })
+      })
+      socket.on("list",(data) =>{
+        var endDate = 0
+        var dateS = 0
+        var dateget
+      if (data.tag == "appointment"){
+         setappointments ( data.result.map((appointment, index)=> {
+          //  console.log(appointment.date)
+           dateS = new Date(appointment.date)
+           dateget = dateS.getTime()
+           endDate = dateS.setTime((dateget+12000))
+           return({
+            "id" : appointment._id,
+            "title" : appointment.name,
+            //description : appointment.description,
+            "level": appointment.level,
+            "startDate": new Date(appointment.date),
+            "endDate": new Date(endDate)
+            })
+         })
+         )
+        //appointments = data.result
+         //console.log(appointments)
+      }
+      // appointments.sort((a, b) => (a.level < b.level) ? 1 : (a.level === b.level) ? ((a.name > b.name) ? 1 : -1) : -1 )
+        //console.log(appointments)
+      })      
+    })
+    // taskAll = appointments.slice()
+    // taskAll.sort((a, b) => (a.level < b.level) ? 1 : (a.level === b.level) ? ((a.name > b.name) ? 1 : -1) : -1 )
+    // console.log("task" + taskAll)
+
+    //<Demo arg = {appointments}/>
+
+      
+    const commitChanges = ({ added, changed, deleted }) => {
+          if (added) {
+          }
+          if (changed) {
+                // data = data.map(appointment => (
+                //     changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment));
+          }
+          if (deleted !== undefined) {
+              console.log(deleted)
+              setappointments(appointments.filter(appointment => appointment.id !== deleted))
+              socket.emit("delete",{"id" : deleted})
+          }
+          //return { data };
+      }
+
+    const handleCheck = (index,data) =>{
+        if (document.getElementById(`default-${index}`).checked == true ){
+          socket.emit("edit",{
+              "name": data.name,
+              "description": data.description,
+              "level": data.level,
+              "date": data.date,
+              "_id": data._id,
+              "done": "1"
+          })
+          console.log(data)
+        }
+        else{
+          socket.emit("edit",{
+              "name": data.name,
+              "description": data.description,
+              "level": data.level,
+              "date": data.date,
+              "_id": data._id,
+              "done": "0"
+          })
+        }
+    }
+
+     return (
         <div>
             <br />
             <Container fluid="md">
@@ -618,11 +727,25 @@ function Calendar() {
                         <Row  className="ListAdjust" >
                             <h2 className="Nav-todo">To Do List</h2>
                             <Form className="To-do">
-                                {['checkbox'].map((type) => (
-                                    <div key={`default-${type}`} className="mb-3">
-                                        <Form.Check type={type} id={`default-${type}`} label={`default ${type}`} />
-                                        <Form.Check type={type} id={`default-${type}`} label={`default ${type}`} />
-                                    </div>))}
+                                {taskAll.map((item, index) => {
+                                  if (item.done === 0){
+                                  return (
+                                    <div key={`default-${index}`} className="mb-3">
+                                        <input type="checkbox" id={`default-${index}`} 
+                                        onChange = {()=> {handleCheck(index,item) }}/> {"  "}
+                                        <a>{item.name}</a>
+                                    </div>)
+                                  }
+                                  else{
+                                    return (
+                                    <div key={`default-${index}`} className="mb-3">
+                                        <input type="checkbox" id={`default-${index}`} 
+                                        onChange = {()=> {handleCheck(index,item) }}
+                                        checked /> {"  "}
+                                        <a>{item.name}</a>
+                                    </div>)
+                                  }
+                                    })}
                             </Form>
                         </Row>
                         <br />
@@ -640,8 +763,47 @@ function Calendar() {
                         <br />
                     </Col>
                     <br />
-                    <Col sm={8} >
-                        <Demo  />
+                    <Col sm={8}>
+                    <div id = "Cal">
+                      <Paper>
+                        <Scheduler
+                            data={appointments}
+                        >
+                            <EditingState
+                               onCommitChanges={commitChanges}
+                            />
+                            <ViewState
+                                defaultCurrentDate={todaydate}
+                            />
+
+                            <MonthView
+                                timeTableCellComponent={TimeTableCell}
+                                dayScaleCellComponent={DayScaleCell}
+                            />
+
+                            <Appointments
+                                appointmentComponent={Appointment}
+                                appointmentContentComponent={AppointmentContent}
+                            />
+                            <Resources
+                                data={resources}
+                            />
+
+                            <Toolbar
+                                flexibleSpaceComponent={FlexibleSpace}
+                            />
+                            <DateNavigator />
+                            <EditRecurrenceMenu />
+
+                            <AppointmentTooltip
+                              showCloseButton
+                              showDeleteButton
+                            />
+                            <AppointmentForm />
+
+                        </Scheduler>
+                      </Paper>
+                      </div>
                     </Col>
                 </Row>
             </Container>

@@ -5,12 +5,15 @@ import './App.css';
 import SignIn from './SignIn';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from './Home';
+import Homee from './components/Homee';
 import Calendar from './Calendar';
+import Alarm from './Alarm';
 import Login from './Login';
 import Signup from './SignUp';
 import Logout from './Logout';
 import Profile from './Profile';
 import Profilen from './Profilen';
+import Notify from './Notify';
 import { useCycle } from "framer-motion";
 
 import ImageHolder from "./ImageHolder";
@@ -39,7 +42,13 @@ function App() {
     }, [currentScene, setCurrentScene]);
 
     const token = localStorage.getItem("accessToken");
-
+    //logout if token expired
+    if(token){
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      if (decodedToken.exp * 1000 < Date.now()) {
+          return <Logout />;
+        }
+    }
     //   if (!token) {
     //   return <PasteTest />
     // }
@@ -50,13 +59,16 @@ function App() {
         <div>
             <Navbar sticky="top"/>
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Homee />} />
+                <Route path="/Home" element={<Home />} />
                 <Route path="/Calendar" element={<Calendar />} />
+                <Route path="/Alarm" element={<Alarm />} />
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/profilen" element={<Profilen />} />
+                <Route path="/notify" element={<Notify />} />
             </Routes>
             <CookieConsent
                 style={{ background: '#ABB7F0' }}

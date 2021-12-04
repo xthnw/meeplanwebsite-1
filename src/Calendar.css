@@ -32,6 +32,7 @@
 
 .Nav-todo{
   background-color: #4f4e59;
+  border-radius: 5px;
   color: aliceblue;
   padding: 5px;
   font-family: 'Dosis', sans-serif !important;
@@ -41,6 +42,7 @@
 .To-do{
   font-family: 'Dosis', sans-serif !important;
   padding: 10px;
+  border-radius: 5px;
   background-color: aliceblue;
   height: 450px;
   align-items: center !important;
@@ -71,4 +73,8 @@
 .photo{
   width: 150px;
   height: 100% ;
+}
+
+#Cal{
+  width: 100%;
 }

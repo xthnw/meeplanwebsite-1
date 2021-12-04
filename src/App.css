@@ -174,3 +174,11 @@ body{
   height: 100%;
 }
 
+.BottomBar{
+  background-color: #4f4e59!important;
+}
+
+.columna{
+  width: 50%;
+  max-width: 550px ;
+}

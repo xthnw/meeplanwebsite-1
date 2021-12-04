@@ -3,6 +3,7 @@
 // import Navbar from "./components/Navbar/Navbar";
 import './App.css';
 import * as React from 'react';
+import Image from 'react-bootstrap/Image';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -38,7 +39,6 @@ import FilterDrama from '@material-ui/icons/FilterDrama';
 import Opacity from '@material-ui/icons/Opacity';
 import ColorLens from '@material-ui/icons/ColorLens';
 import { withStyles } from '@material-ui/core/styles';
-import { owners } from '/src/demo-data/tasks';
 import { Modal, Button, Form, CloseButton, Row, Col, ToggleButton } from 'react-bootstrap';
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
@@ -95,7 +95,26 @@ function Home() {
         width:'1668px',
         hieht: '2224px'  }}*/>
 
-            <h1><TestBG /><br /><Item style={{textAlign: "center"}}>_______________</Item></h1>
+            <div>
+              <Container>
+                <Row>
+                  <Col className="columna">
+                  <LazyShowY>
+                   <h1>Welcome to Mee Plan</h1>
+                  </LazyShowY>
+                  <LazyShowY>
+                   <p2>HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello</p2>
+                  </LazyShowY>
+                  </Col>
+                  <Col>
+                   <Image src="holder.js/171x180" rounded />
+                   <Image src="./Picture/Logobar.png/171x180" rounded />
+                  </Col>
+                </Row>
+              </Container>
+            </div>
+            <h1><TestBG /><br />
+            <Item style={{textAlign: "center"}}>_______________</Item></h1>
             <h2 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'bold', fontSize: 100, fontFamily: 'Dosis'}} >
             <LazyShowY>
             FUNCTION 
@@ -119,9 +138,11 @@ function Home() {
             <br />
             <div>
             <h5 style={{textAlignVertical: "center",textAlign: "center", fontWeight: 'normal', fontSize: 50, fontFamily: 'Dosis'}} >
+            <div classNames="BottomBar">
             <LazyShowY>
-            Mee Plan | Website & IoT
+            <p2>Mee Plan | Website & IoT</p2>
             </LazyShowY> 
+            </div>
             </h5>
         </div>
         </div>
