@@ -29,6 +29,9 @@ else{
     cName:'nav-links'
   }
   var logOut = {
+    title:'Register',
+    url:'/SignUp',
+    cName:'nav-links'
   }
 }
 
