@@ -14,14 +14,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import apiurl from './common/api'
 
-//finish
 
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://meeplanwebsite-1.meeplan.repl.co/">
+      <Link color="inherit" href={window.location.origin}>
         Meeplan
       </Link>{' '}
       {new Date().getFullYear()}
@@ -42,7 +42,7 @@ export default function SignIn() {
       password: data.get('password'),
       email: data.get('email')
     });
-    axios.post('https://MeePlan101-backend.meeplan.repl.co/auth/signup', {
+    axios.post(apiurl + '/auth/signup', {
       "username": data.get('username'),
       "password": data.get('password'),
       "email": data.get('email')
@@ -117,7 +117,7 @@ export default function SignIn() {
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  
                 </Link>
               </Grid>
               <Grid item>

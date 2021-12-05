@@ -44,12 +44,14 @@ import MeePic from './Picture/aMee.jpeg';
 import TaskBarPic from './Picture/Taskbar.png';
 import Logo from './Picture/Logo.png';
 
+import apiurl from './common/api'
+
 var token = localStorage.getItem("accessToken");
 const username = JSON.parse(localStorage.getItem('user'));
 const email = JSON.parse(localStorage.getItem('email'));
 
 import { io } from "socket.io-client";
-const socket = io("https://MeePlan101-backend.meeplan.repl.co/?token="+token,{ 
+const socket = io(apiurl + "/?token="+token,{ 
 withCredentials: true
 });
 

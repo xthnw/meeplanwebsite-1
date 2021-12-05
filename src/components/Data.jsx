@@ -23,7 +23,7 @@ export const homeObjTwo ={
 };
 
 export const homeObjThree ={
-  topline: 'Wio Therminal',
+  topline: 'Wio Terminal',
   headline: 'Digital Card',
   description: '+ Todolist',
   buttonLabel: 'Log-in',

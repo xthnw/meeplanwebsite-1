@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
 import React, { useState } from 'react';
+import apiurl from './common/api';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 async function loginUser(credentials) {
-  return fetch('https://MeePlan101-backend.meeplan.repl.co/auth/signin', {
+  return fetch(apiurl + '/auth/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -62,7 +63,7 @@ function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://meeplanwebsite-1.meeplan.repl.co">
+      <Link color="inherit" href={window.location.origin}>
         Meeplan
       </Link>{' '}
       {new Date().getFullYear()}

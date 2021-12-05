@@ -23,7 +23,7 @@ class Navbar extends Component{
     return(
       <nav className = "NavbarItems">
         <div className = "Logo">
-          <a href="https://meeplanwebsite-1.meeplan.repl.co/">
+          <a href={window.location.origin}>
             <img src={Logo} style={{width:'180px',height: '68px'}} />
           </a>
         </div>

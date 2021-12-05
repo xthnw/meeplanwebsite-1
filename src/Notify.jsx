@@ -2,6 +2,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { useEffect } from "react";
 import axios from 'axios';
+import apiurl from './common/api';
 
 var token = localStorage.getItem("accessToken");
 
@@ -21,7 +22,7 @@ function verifyLineCode(code,state) {
       'Content-Type': 'application/json'
     }
   }
-  axios.post('https://MeePlan101-backend.meeplan.repl.co/notify/verify', params, config)
+  axios.post(apiurl + '/notify/verify', params, config)
     .then(res => {
         //console.log(res);
         swal("Successfully linked with Line Notify!", {

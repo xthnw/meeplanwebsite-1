@@ -11,7 +11,7 @@ import Alarm from './Alarm';
 import Login from './Login';
 import Signup from './SignUp';
 import Logout from './Logout';
-import Profile from './Profile';
+//import Profile from './Profile';
 import Profilen from './Profilen';
 import Notify from './Notify';
 import { useCycle } from "framer-motion";

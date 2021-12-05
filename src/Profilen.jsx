@@ -11,10 +11,12 @@ import axios from 'axios';
 
 import BearPic from './Picture/Bear.png'
 
+import apiurl from './common/api'
+
 var token = localStorage.getItem("accessToken");
 const username = JSON.parse(localStorage.getItem('user'));
 const email = JSON.parse(localStorage.getItem('email'));
-const socket = io("https://MeePlan101-backend.meeplan.repl.co/?token="+token,{ 
+const socket = io(apiurl+"/?token="+token,{ 
 withCredentials: true
 });
 var wioall = []
@@ -78,7 +80,7 @@ function Profilen (){
       const queryObj = {
         response_type: 'code',
         client_id: 'pYTmD4zxeWsUfbkI03jK2g',
-        redirect_uri: 'https://meeplanwebsite-1.meeplan.repl.co/notify',
+        redirect_uri: apiurl+'/notify',
         scope:'notify',
         state: token
       };
@@ -95,7 +97,7 @@ function Profilen (){
         'Content-Type': 'application/json'
       }
     }
-    axios.post('https://MeePlan101-backend.meeplan.repl.co/notify/revoke', params, config)
+    axios.post(apiurl+'/notify/revoke', params, config)
       .then(res => {
         swal('Line disconnected.')
       }).catch(err=>{
