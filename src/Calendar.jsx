@@ -37,10 +37,12 @@ import ColorLens from '@material-ui/icons/ColorLens';
 import { withStyles } from '@material-ui/core/styles';
 import { levels } from '/src/level-color/tasks';
 
-import Alarmbar from './Picture/Alarmbar.png';
+import AlarmBar from './Picture/Alarmbar.png';
 import AddTaskPic from './Picture/addtask.jpeg';
 import AddAlarmPic from './Picture/alarm.jpeg';
 import MeePic from './Picture/aMee.jpeg';
+import TaskBarPic from './Picture/Taskbar.png';
+import Logo from './Picture/Logo.png';
 
 var token = localStorage.getItem("accessToken");
 const username = JSON.parse(localStorage.getItem('user'));
@@ -191,8 +193,9 @@ function Taskpopup(props) {
           }
           // console.log(newTaskAlarm);
           socket.emit("create_alarm",newTaskAlarm);
-          socket.emit("create", newTask);
         }
+        console.log('task sent');
+        socket.emit("create", newTask);
         props.onHide();
       }
     }
@@ -207,7 +210,7 @@ function Taskpopup(props) {
         >
             <Modal.Header closeButton variant="white"  className="Header" >
                 <div >
-                    <img src="./src/Picture/Taskbar.png" style={{ width: '120px', height: '50px' }} />
+                    <img src={TaskBarPic} style={{ width: '120px', height: '50px' }} />
                 </div>
             </Modal.Header>
             <Modal.Body>
@@ -316,7 +319,7 @@ function Alarmpopup(props) {
         >
             <Modal.Header closeButton className="Header">
                 <div >
-                    <img src="./src/Picture/Alarmbar.png" style={{ width: '120px', height: '50px' }} />
+                    <img src={AlarmBar} style={{ width: '120px', height: '50px' }} />
                 </div>
             </Modal.Header>
             <Modal.Body>
@@ -535,7 +538,7 @@ const AppointmentContent = withStyles(styles, { name: 'AppointmentContent' })(({
 const FlexibleSpace = withStyles(styles, { name: 'ToolbarRoot' })(({ classes, ...restProps }) => (
     <Toolbar.FlexibleSpace {...restProps} className={classes.flexibleSpace}>
         <div className={classes.flexContainer}>
-            <img className="photo" style = {{filter: "invert(1) grayscale(100%) brightness(200%)"}}src="/src/Picture/Logo.png" />
+            <img className="photo" style = {{filter: "invert(1) grayscale(100%) brightness(200%)"}}src={Logo} />
         </div>
     </Toolbar.FlexibleSpace>
 ));
@@ -545,20 +548,24 @@ var taskAll = []
 function Calendar() {
     var [appointments, setappointments] = useState([])
     const todaydate = new Date();
-    var date7 = new Date();
-    var s = date7.getDate()+7
+    var date7 = new Date(); 
+    var s = date7.getDate()+7;//me looking at calendar full of task but only one shown
+    var date31 = new Date();
+    var s2 = date7.getDate()+31
     date7.setDate(s)
+    date31 .setDate(s2)
     useEffect(()=>{
       socket.on("connect_error", (err) => {
       console.log(`connect_error due to ${err.message}`);
       });
-      socket.on("update_setting",(err)=>{
+      /*  test noi na
+      socket.on("update",(err)=>{
         socket.emit("list",{
             "lwr": new Date(),
             "upr": date7,
             "tag" : "todo"
         })
-      })
+      })*/
       socket.on("list",(data) =>{
         if (data.tag == "todo"){
           taskAll = data.result
@@ -568,9 +575,15 @@ function Calendar() {
           
       })
 
-      socket.on("update_setting",(err)=>{
+      socket.on("update",(err)=>{
+        console.log("update message recieved")
         var bf2 = todaydate.getFullYear() - 2
         var af2 = todaydate.getFullYear() + 2
+        socket.emit("list",{
+            "lwr": new Date(),
+            "upr": date31,
+            "tag" : "todo"
+        })
         socket.emit("list",{
             "lwr": bf2.toString() + "-01-01",
             "upr": af2.toString() + "-01-01",
