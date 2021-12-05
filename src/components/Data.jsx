@@ -1,13 +1,14 @@
-
+//haiiiiiiiii มีแขกมาเยือนฮายย ไปละบายยย
 import Logobar from '../Picture/Logobar.png'
 import web from '../Picture/web.png'
 import Wio from '../Picture/Wio.png'
+import About from '../Picture/About.png'
 
 
 export const homeObjOne ={
   topline: 'Welcome to',
   headline: 'Mee Plan',
-  description: 'สวัสดีทุกท่าน ขอต้อนรับทุกท่านเข้าสู่โลกของการมีแผนกับพวกเราชาว Mee Plan ที่จะทำให้การทำงานของทุกท่านมีความเป็นระเบียบมากยิ่งขึ้น',
+  description: 'สวัสดีค่ะ/ครับ ทุกท่าน ขอต้อนรับทุกท่านเข้าสู่โลกของการมีแผนกับพวกเราชาว Mee Plan ที่จะทำให้การทำงานของทุกท่านมีความเป็นระเบียบมากยิ่งขึ้น',
   buttonLabel: 'Get Started',
   imgStart: '',
   img: Logobar,
@@ -17,7 +18,7 @@ export const homeObjOne ={
 export const homeObjTwo ={
   topline: 'Website',
   headline: 'Digital Calendar',
-  description: '+ Todolist',
+  description: ' แพลนเนอร์และทูดูลิสต์ในรูปแบบดิจิตอล เพิ่มความสะดวกในการใช้งาน สามารถใช้ได้ทุกที่ที่มีอินเทอร์เน็ตโดยไร้ขอบเขต ทั้งยังมีการจัดลำดับการทำงานตามเวลาและความสำคัญของงาน โดยสามารถแจ้งเตือนผ่าน LINE Notify ได้อีกด้วย',
   buttonLabel: 'Log-in',
   imgStart: 'start',
   img: web,
@@ -27,7 +28,7 @@ export const homeObjTwo ={
 export const homeObjThree ={
   topline: 'Wio Terminal',
   headline: 'Digital Card',
-  description: '+ Todolist',
+  description: 'โน้ตเตือนความจำในรูปแบบดิจิตอลที่มีการเชื่อต่อแบบเรียลไทม์ โดยจะทำการแสดงงานของท่านเช่นเดียวกับบนหน้าเว็บไซต์ซึ่งสามารถเช็คงานผ่านหน้าจอของบอร์ด Wio Terminal ได้โดยตรงโดยที่ไม่จำเป็นที่จะต้องเปิดเข้ามาในเว็บไซต์ นอกจากนี้ยังสามารถทำหน้าที่เป็นนาฬิกาดิจิตอลได้อีกด้วย',
   buttonLabel: 'Log-in',
   imgStart: '',
   img: Wio,
@@ -35,10 +36,10 @@ export const homeObjThree ={
 };
 export const homeObjFour ={
   topline: '',
-  headline: 'About us',
-  description: '',
-  buttonLabel: 'Log-in',
+  headline: 'About Us',
+  description: 'สวัสดีค่ะ/ครับ พวกเราทีมงานโปรเจค "Mee Plan" ขอขอบคุณที่ให้ความสนใจกับโปรเจคนี้ของพวกเราเป็นอย่างยิ่ง โปรเจคนี้สร้างขึ้นเพื่ออำนวยความสะดวกในการวางแผนงาน ขอให้ทุกท่านมีความสุขกับการใช้งานดิจิตอลแพลนเนอร์และดิจิตอลการ์ดของพวกเราค่ะ/ครับ',
+  buttonLabel: 'Contact',
   imgStart: 'start',
-  img: Logobar,
+  img: About,
   alt: 'Function'
 };

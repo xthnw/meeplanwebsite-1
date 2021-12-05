@@ -123,12 +123,13 @@ function AddTask() {
 }
 
 function EditTask(props) {
-    const [data, setData] = React.useState(props.task);
+    const [data, setData] = React.useState({});
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <span>
             <i className="far fa-edit" style = {{marginLeft : "1rem"}}
             onClick = {() => {setModalShow(true)
+                setData(props.task)
                 //console.log(data)
             }}></i>
             <Taskpopup
@@ -183,27 +184,37 @@ function Taskpopup(props) {
           done: false,
           date: dateTime
         }
+        
         //console.log(dateTime)
         // console.log(document.getElementById("taskTime").value)
         // var changeUTC = dateTime.getHours()+tzUTC
         // dateTime.setHours(changeUTC)
-        if (document.getElementById("alarm-switch").checked == true){
+          if (document.getElementById("alarm-switch").checked == true){
           var newTaskAlarm = {
             "name" :  document.getElementById("taskName").value,
             "date" : dateTime,
             "description" : document.getElementById("taskDescrpt").value
           }
           // console.log(newTaskAlarm);
-          useEffect(()=>{
-            socket.emit("create_alarm",newTaskAlarm);
-          })
-          
-        }
-        useEffect(()=>{
-            console.log('task sent');
+              socket.emit("create_alarm",newTaskAlarm);
+          }
+          console.log('task sent');
+          if (data.name){
+              setData(
+                {
+                name: document.getElementById("taskName").value,
+                description: document.getElementById("taskDescrpt").value,
+                level: levelTask,
+                done: false,
+                date: dateTime,
+                _id: data._id
+                }
+              )
+              socket.emit("edit", data)
+          }
+          else{
             socket.emit("create", newTask);
-          })
-        
+          }
         props.onHide();
       }
     }
@@ -239,10 +250,10 @@ function Taskpopup(props) {
                         <Row>
                             <Col>
                                 <Form.Control id = "taskDate" type="Date"
-                                defaultValue = {data.date} />
+                                defaultValue = {data.date}required />
                             </Col>
                             <Col>
-                                <Form.Control id = "taskTime" placeholder="Time" type="Time"
+                                <Form.Control id = "taskTime" placeholder="Time" type="Time" required
                                 />
                             </Col>
                         </Row>
@@ -617,12 +628,13 @@ function Calendar() {
          )
       }else if (data.tag == "todo"){
           taskAll = data.result
-          taskAll.sort((a, b) => (a.date > b.date) ? 1 : (a.date === b.date) ? ((a.level > b.level) ? 1 : -1) : -1 )
+          taskAll.sort((a, b) => (new Date(a.date).getDate() >new Date(b.date).getDate()) ? 1 : (new Date(a.date).getDate() === new Date(b.date).getDate()) ? ((a.level > b.level) ? 1 : -1) : -1 )
           // console.log(data.result)
         }
+      
 
-
-      })      
+      })
+      return () => {setappointments([])}     
     },[])
 
       

@@ -22,7 +22,7 @@ class Navbar extends Component{
   render(){
     return(
       <nav className = "NavbarItems">
-        <div className = "Logo">
+        <div className = "stalemoon">
           <a href={window.location.origin}>
             <img src={Logo} style={{width:'180px',height: '68px'}} />
           </a>
