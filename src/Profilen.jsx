@@ -9,6 +9,8 @@ import swal from 'sweetalert';
 import qs from 'qs';
 import axios from 'axios';
 
+import BearPic from './Picture/Bear.png'
+
 var token = localStorage.getItem("accessToken");
 const username = JSON.parse(localStorage.getItem('user'));
 const email = JSON.parse(localStorage.getItem('email'));
@@ -197,7 +199,7 @@ function Profilen (){
         </Col >
         <Col className="MPic">
         <br />
-        <img className="Pic" src='../src/Picture/Bear.png' />
+        <img className="Pic" src={BearPic} />
         </Col>
       </Row>
     </Container>
