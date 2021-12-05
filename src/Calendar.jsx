@@ -194,10 +194,16 @@ function Taskpopup(props) {
             "description" : document.getElementById("taskDescrpt").value
           }
           // console.log(newTaskAlarm);
-          socket.emit("create_alarm",newTaskAlarm);
+          useEffect(()=>{
+            socket.emit("create_alarm",newTaskAlarm);
+          })
+          
         }
-        console.log('task sent');
-        socket.emit("create", newTask);
+        useEffect(()=>{
+            console.log('task sent');
+            socket.emit("create", newTask);
+          })
+        
         props.onHide();
       }
     }
@@ -560,23 +566,19 @@ function Calendar() {
       socket.on("connect_error", (err) => {
       console.log(`connect_error due to ${err.message}`);
       });
-      /*  test noi na
+      /*
       socket.on("update",(err)=>{
         socket.emit("list",{
             "lwr": new Date(),
-            "upr": date7,
+            "upr": date31,
             "tag" : "todo"
         })
-      })*/
-      socket.on("list",(data) =>{
-        if (data.tag == "todo"){
-          taskAll = data.result
-          taskAll.sort((a, b) => (a.date > b.date) ? 1 : (a.date === b.date) ? ((a.level > b.level) ? 1 : -1) : -1 )
-          // console.log(data.result)
-        }
-          
       })
-
+      socket.on("list",(data) =>{
+        
+          //เข้าดิสๆ
+      })
+    */
       socket.on("update",(err)=>{
         console.log("update message recieved")
         var bf2 = todaydate.getFullYear() - 2
@@ -593,6 +595,7 @@ function Calendar() {
         })
       })
       socket.on("list",(data) =>{
+        console.log("list recieved")
         var endDate = 0
         var dateS = 0
         var dateget
@@ -612,9 +615,15 @@ function Calendar() {
             })
          })
          )
-      }
+      }else if (data.tag == "todo"){
+          taskAll = data.result
+          taskAll.sort((a, b) => (a.date > b.date) ? 1 : (a.date === b.date) ? ((a.level > b.level) ? 1 : -1) : -1 )
+          // console.log(data.result)
+        }
+
+
       })      
-    })
+    },[])
 
       
     const commitChanges = ({ added, changed, deleted }) => {
@@ -633,6 +642,7 @@ function Calendar() {
       }
 
     const handleCheck = (index,data) =>{
+      console.log("hit handle check")
         if (data.done == 0 ){
           socket.emit("edit",{
               "name": data.name,

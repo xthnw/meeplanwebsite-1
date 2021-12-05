@@ -1,5 +1,7 @@
 
 import Logobar from '../Picture/Logobar.png'
+import web from '../Picture/web.png'
+import Wio from '../Picture/Wio.png'
 
 
 export const homeObjOne ={
@@ -18,7 +20,7 @@ export const homeObjTwo ={
   description: '+ Todolist',
   buttonLabel: 'Log-in',
   imgStart: 'start',
-  img: Logobar,
+  img: web,
   alt: 'Function'
 };
 
@@ -28,7 +30,7 @@ export const homeObjThree ={
   description: '+ Todolist',
   buttonLabel: 'Log-in',
   imgStart: '',
-  img: Logobar,
+  img: Wio,
   alt: 'Function'
 };
 export const homeObjFour ={
