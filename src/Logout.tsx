@@ -23,7 +23,7 @@ export default function Logout() {
     const handleLogout = () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("user");
-        window.location.href = "https://meeplanwebsite-1.meeplan.repl.co/login";
+        window.location.href = '/login';
     }
 
     handleLogout();
