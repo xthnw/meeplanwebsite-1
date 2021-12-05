@@ -90,7 +90,7 @@ export default function SignIn() {
         localStorage.setItem('accessToken', response['accessToken']);
         localStorage.setItem('user', JSON.stringify(response['username']));
         localStorage.setItem('email', JSON.stringify(response['email']));
-        window.location.href = "/profilen";
+        window.location.href = "/profile";
       })
       .catch(error => {
         swal("Failed", response.message, "error");
@@ -124,7 +124,6 @@ export default function SignIn() {
               required
               fullWidth
               id="username"
-              // label="karn.yong@mecallapi.com"
               label = "Username"
               name="username"
               autoComplete="username"
@@ -142,10 +141,7 @@ export default function SignIn() {
               autoComplete="current-password"
               onChange={e => setPassword(e.target.value)}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+            
             <Button
               type="submit"
               fullWidth
@@ -157,8 +153,8 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
+                <Link href="/SignUp" variant="body2">
+                 {""}
                 </Link>
               </Grid>
               <Grid item>
@@ -174,3 +170,7 @@ export default function SignIn() {
     </ThemeProvider>
   );
 }
+/*<FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />*/ 

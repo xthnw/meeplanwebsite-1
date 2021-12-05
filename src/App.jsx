@@ -61,12 +61,12 @@ function App() {
             <Routes>
                 <Route path="/" element={<Homee />} />
                 <Route path="/Home" element={<Home />} />
-                <Route path="/Calendar" element={<Calendar />} />
+                <Route path="/calendar" element={<Calendar />} />
                 <Route path="/Alarm" element={<Alarm />} />
-                <Route path="/Login" element={<Login />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/logout" element={<Logout />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile" element={<Profilen />} />
                 <Route path="/profilen" element={<Profilen />} />
                 <Route path="/notify" element={<Notify />} />
             </Routes>

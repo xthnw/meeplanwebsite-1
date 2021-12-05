@@ -4,18 +4,25 @@ var token = localStorage.getItem("accessToken");
 const username = JSON. parse(localStorage.getItem('user'));
 
 if (token){
+  var calendar = {
+    title:'📅 Calendar',
+    url:'/calendar',
+    cName:'nav-links'
+  }
   var lastMenu = {
     title: "👩🏻‍💻 " + username,
-    url:'/profilen',
+    url:'/profile',
     cName:'nav-links'
   }
   var logOut = {
     title: 'Logout',
-    url:'/Logout',
+    url:'/logout',
     cName:'nav-links'
   }
 }
 else{
+  var calendar = {
+  }
   var lastMenu = {
     title:'Login',
     url:'/login',
@@ -26,11 +33,7 @@ else{
 }
 
 export const MenuItems =[
-  {
-    title:'📅 Calendar',
-    url:'/Calendar',
-    cName:'nav-links'
-  },
+  calendar,
   lastMenu,
   logOut
   // {
