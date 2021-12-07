@@ -42,9 +42,9 @@ function Notify(){
     var code = useQuery().get('code')
     var state = useQuery().get('state')
     verifyLineCode(code,state)
+    //localStorage.setItem('state', JSON.stringify(state))
   },[])
-  
-  console.log()
+  //console.log()
   return (
     <div>
     </div>

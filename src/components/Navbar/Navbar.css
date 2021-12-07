@@ -64,30 +64,39 @@
 @media screen and (max-width: 960px){
   
   .NavbarItems{
-    position: relative !important;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 5;
   }
 
   .nav-menu{
     display: flex;
     flex-direction: column;
-    max-width: 960px !important;
+    justify-content: space-around;
+    /* max-width: 960px !important; */
     width: 100% !important;
-    height: 150px !important;
+    height: fit-content !important;
     position: absolute !important;
-    top: 80px!important;
-    align-items: right;
+    top: 80px !important;
+    align-items: center;
     opacity: 1;
     transition: all 0.5s ease;
-    z-index: 1;
+    z-index: 5;
+  }
+
+  .nav-list{
+    background:#4f4e59;
   }
 
   .nav-menu.active{
-    background:#4f4e59;
-    padding-bottom: 1em!important;
+    /* background:#4f4e59; */
+    padding-bottom: 1em;
+    padding-top: 1em;
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
-    z-index: 1;
+    z-index: 5;
   }
 
   .nav-link{
@@ -126,7 +135,7 @@
     font-size: 2rem;
   }
 
-  .nav-links-mobile{
+  /* .nav-links-mobile{
     display: block;
     text-align: center;
     padding: 1rem;
@@ -137,13 +146,13 @@
     text-decoration: none;
     color: rgb(236, 236, 236);
     font-size: 1.3rem;
-  }
+  } */
 
-  .nav-links-mobile:hover{
+  /* .nav-links-mobile:hover{
     background: rgb(54, 61, 90);
     color: rgb(236, 236, 236);
     transition: 250ms;
-  }
+  } */
   
   Button{
     display: none;

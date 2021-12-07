@@ -11,6 +11,8 @@ body{
 
 .Page{
   height: 50rem!important;
+  display: flex !important;
+  flex-wrap: wrap !important;
 }
 
 .Topic{

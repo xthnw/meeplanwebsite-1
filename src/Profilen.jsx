@@ -16,15 +16,14 @@ import apiurl from './common/api'
 var token = localStorage.getItem("accessToken");
 const username = JSON.parse(localStorage.getItem('user'));
 const email = JSON.parse(localStorage.getItem('email'));
+
 const socket = io(apiurl+"/?token="+token,{ 
 withCredentials: true
 });
 var wioall = []
 
-
-
-
 function Profilen (){
+  const [linetk, setLinetk] = useState("")
   useEffect(()=>{
     socket.on("connect_error", (err) => {
     console.log(`connect_error due to ${err.message}`);
@@ -35,6 +34,8 @@ function Profilen (){
     socket.on("list_iot_id",(data) =>{
       wioall = data.iot_id
     })
+    //if (localStorage.getItem("state"))
+    //console.log(localStorage)
   })
   const handleDelete = (index) => {
     swal({
@@ -114,7 +115,7 @@ function Profilen (){
     <br />
     <Container>
      <Row className="Page">
-        <Col sm={8}>
+        <Col>
           <h1>Profile</h1>
           <br />
             <Row>
@@ -137,7 +138,7 @@ function Profilen (){
             <br />
             <Row>
                <Col sm={4} className="Id">
-               <p className="Topic">Line Notify</p>
+               <p className="Topic"><i class="fab fa-line" style={{color : "#00b900"}}></i>{` Line Notify `}</p>
                </Col>
                <Col sm={6}>
                <Button href="#" className="Line" onClick = {() => redirectLine()}>Connect</Button> 

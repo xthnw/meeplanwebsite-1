@@ -146,7 +146,15 @@ function EditTask(props) {
 function Taskpopup(props) {
     if (props.data && props.show){
         var [data, setData] = React.useState(props.data)
-        console.log(data.name)
+        var dataSplitDate_ = new Date(data.date)
+        var dataSplitDate = [dataSplitDate_.toDateString(), dataSplitDate_.toTimeString()]
+        dataSplitDate[1] = dataSplitDate[1].split(" ")
+        if (dataSplitDate_.getDate() < 10){
+          dataSplitDate[0] = dataSplitDate_.getFullYear() + "-" + dataSplitDate_.getMonth() + "-0" + dataSplitDate_.getDate()
+        }
+        else{
+        dataSplitDate[0] = dataSplitDate_.getFullYear() + "-" + dataSplitDate_.getMonth() + "-" + dataSplitDate_.getDate()
+        }
     }
     else if(props.show){
       var [data, setData] = React.useState({
@@ -157,12 +165,6 @@ function Taskpopup(props) {
         level: null
       })
     }
-    // useEffect(()=> {
-    //   if (props.data && props.show){
-    //         setData(props.data)
-    //   }
-    //   console.log(data)
-    // } ,[])
     var levelTask = 0;
     // var d = new Date();
     // var tzUTC = d.getTimezoneOffset()/60;
@@ -200,17 +202,14 @@ function Taskpopup(props) {
           }
           console.log('task sent');
           if (data.name){
-              setData(
-                {
+              socket.emit("edit", {
                 name: document.getElementById("taskName").value,
                 description: document.getElementById("taskDescrpt").value,
                 level: levelTask,
-                done: false,
+                done: data.done,
                 date: dateTime,
                 _id: data._id
-                }
-              )
-              socket.emit("edit", data)
+                });
           }
           else{
             socket.emit("create", newTask);
@@ -242,18 +241,14 @@ function Taskpopup(props) {
                         <Row>
                             <Col>
                                 <Form.Label>Date</Form.Label>
+                                <br />
+                                <Form.Control id = "taskDate" type="Date"
+                                defaultValue = {dataSplitDate[0]}required />
                             </Col>
                             <Col>
                                 <Form.Label>Time</Form.Label>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Form.Control id = "taskDate" type="Date"
-                                defaultValue = {data.date}required />
-                            </Col>
-                            <Col>
-                                <Form.Control id = "taskTime" placeholder="Time" type="Time" required
+                                <br />
+                                <Form.Control id = "taskTime" placeholder="Time" type="Time" defaultValue = {dataSplitDate[1][0]} required
                                 />
                             </Col>
                         </Row>

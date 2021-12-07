@@ -13,7 +13,6 @@
     filter: invert(1) grayscale(100%) brightness(200%);
 }
 
-
 .Button-Save{
    background-color: #4f4e59!important;
    color:aliceblue!important;
@@ -59,7 +58,7 @@
 
 .ListAdjust{
   display: flex !important;
-  justify-content:center !important; 
+  justify-content: center !important; 
 }
 
 .ListAdjust2{
@@ -98,11 +97,11 @@
 }
 
 #tododo{
-  justify-content: space-between !important;
+  justify-content: space-around !important;
 }
 
 .container-lg{
-  justify-content: space-between !important;
+  justify-content: space-around !important;
 }
 
 .checkboxOut-5{
