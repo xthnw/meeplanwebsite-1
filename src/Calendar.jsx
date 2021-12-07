@@ -164,6 +164,7 @@ function Taskpopup(props) {
         done: null,
         level: null
       })
+      var dataSplitDate = [0, 0]
     }
     var levelTask = 0;
     // var d = new Date();
@@ -582,7 +583,6 @@ function Calendar() {
       })
       socket.on("list",(data) =>{
         
-          //เข้าดิสๆ
       })
     */
       socket.on("update",(err)=>{
