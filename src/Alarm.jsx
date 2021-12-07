@@ -26,18 +26,17 @@ function Alarm () {
       })
       socket.on("list_alarm", (data) => {
         setAlarmTk(data.sort((a, b) => (new Date(a.date) >new Date(b.date)) ? 1 : (new Date(a.date) === new Date(b.date)) ? ((a.name > b.name) ? 1 : -1) : -1 ))
-        console.log(alarmTk)
       })
     }
     ,[])
   const boxstyle = {
-    margin : "0.5rem",
+    margin : "1rem",
     padding : "1rem",
     backgroundColor : "#ffffff",
     borderRadius : "5px",
     display : "flex",
     flexDirection: "column",
-    justifyContent : "center",
+    justifyContent : "space-around",
     boxShadow : "0px 0px 10px #4f4e595b",
     width: "70%"
   }
@@ -49,7 +48,6 @@ function Alarm () {
   }
 
   const handleAddAlarm = (props) => {
-    console.log(props)
     socket.emit("create_alarm",props)
     document.getElementById("nameA").value = null
     document.getElementById("dateA").value = null
@@ -73,14 +71,23 @@ function Alarm () {
                   <li  key = {index} style = {{listStyle:'none', padding: 0,margin: 0}}>
                   <div className="alarm-card" style = {boxstyle}>
 
-                    <label>
+                    <label style = {{ display: "flex", justifyContent:"space-between"}}>
                       {`Title :  ${item.name}`} 
+                      <i className="far fa-calendar-times" 
+                      onClick = {()=>{
+                       socket.emit("delete_alarm",{
+                       "alarm_id" : item.alarmID
+                      })
+                      }
+                      }
+                      ></i>
                     </label>
                     <label>
                       {`Description : ${item.description}`}
                     </label>
                     <label>
-                      {`Notify : ${alarmDate}`}
+                    <i className="far fa-bell"></i>
+                      {` Notify : ${alarmDate}`}
                     </label>
                   </div>
                   </li>
@@ -90,11 +97,20 @@ function Alarm () {
                   return (
                   <li  key = {index} style = {{listStyle:'none', padding: 0,margin: 0}}>
                   <div className="alarm-card" style = {boxstyle}>
-                    <label>
+                    <label style = {{ display: "flex", justifyContent:"space-between"}}>
                       {`Title :  ${item.name}`} 
+                      <i class="far fa-calendar-times"    
+                      onClick = {()=>{
+                       socket.emit("delete_alarm",{
+                       "alarm_id" : item.alarmID
+                      })
+                      }
+                      }>
+                      </i>
                     </label>
                     <label>
-                      {`Notify : ${alarmDate}`}
+                      <i class="far fa-bell"></i>
+                      {` Notify : ${alarmDate}`}
                     </label>
                   </div>
                   </li>
