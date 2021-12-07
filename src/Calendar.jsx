@@ -58,10 +58,11 @@ withCredentials: true
 
 
 function Today() {
+    const [modalShow, setModalShow] = React.useState(false);
     return (
         <div>
             <Card sx={{ maxWidth: 90 }}>
-                <CardActionArea>
+                <CardActionArea onClick={() => setModalShow(true)}>
                     <CardMedia
                         component="img"
                         height="90"
@@ -70,12 +71,147 @@ function Today() {
                     />
                 </CardActionArea>
             </Card>
+            <ClothColor 
+            show={modalShow}
+            onHide={() => setModalShow(false)} />
         </div>
 
     );
 }
 
-
+function ClothColor(props){
+      var today = new Date().getDay()
+      if (today == 0) {today = "Sunday";
+        var color = [
+          [["Black","Black"],  ["Purple","DarkViolet"]], 
+          [["Red","Red"]], 
+          [["Yellow","Khaki"], ["Green","LightGreen"], ["Gray","Gray"]], 
+          [["White","White"], ["Coral","NavajoWhite"]], 
+          [["Blue","DodgerBlue"],["LightBlue","DeepSkyBlue"]]
+        ]
+      }
+      else if (today == 1){ today = "Monday";
+         var color = [
+          [["Yellow","Khaki"], ["Orange","Salmon"]], 
+          [["Pink","Pink"],["LightBlue","DeepSkyBlue"], ["Green","LightGreen"]], 
+          [["Yellow","Khaki"], ["Blue","DodgerBlue"]], 
+          [ ["Purple","DarkViolet"], ["Black","Black"]], 
+          [["Red","Red"]]
+        ]
+      }
+      else if (today == 2){ today = "Tuesday";
+      var color =
+        [
+          [ ["Brown","Peru"]],
+          [["Red","Red"],  ["Purple","DarkViolet"], ["Gray","Gray"]],
+          [["Pink","Pink"], ["Green","LightGreen"]],
+          [["Orange","Salmon"]],
+          [["White","White"],["Yellow","Khaki"]]
+        ]
+      }
+      else if (today == 3){ today = "Wednesday";
+      var color =
+        [
+          [ ["Purple","DarkViolet"]],
+          [["Blue","DodgerBlue"], ["Yellow","Khaki"], ["White","White"]],
+          [["Black","Black"], ["Green","LightGreen"]],
+          [["Gray","Gray"]],
+          [["Orange","Salmon"],["Pink","Pink"]]
+        ]
+      }
+      else if (today == 4){ today = "Thursday";
+      var color =
+        [
+          [["Yellow","Khaki"], ["LightBlue","DeepSkyBlue"]],
+          [["White","White"], ["Green","LightGreen"]],
+          [["Gray","Gray"], ["Orange","Salmon"]],
+          [["Red","Red"]],
+          [ ["Purple","DarkViolet"],["Blue","DodgerBlue"], ["Black","Black"]]
+        ]
+      }
+      else if (today == 5){ today = "Friday";
+      var color =
+        [
+          [["LightBlue","DeepSkyBlue"], ["Blue","DodgerBlue"], ["Brown","Peru"]],
+          [["Yellow","Khaki"]],
+          [["Black","Black"], ["Green","LightGreen"]],
+          [["Red","Red"],["Pink","Pink"]],
+          [["Gray","Gray"], ["Purple","DarkViolet"]]
+        ]
+      }
+      else{ today = "Saturday";
+      var color =
+        [
+          [["Gray","Gray"]],
+          [["Yellow","Khaki"], ["Pink","Pink"]],
+          [["Black","Black"], ["Purple","DarkViolet"], ["Red","Red"]],
+          [["Blue","DodgerBlue"],["LightBlue","DeepSkyBlue"]],
+          [["Green","LightGreen"],["Orange","Salmon"]]
+        ]
+      }
+      return (
+        <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            className="Main"
+        >
+            <Modal.Header closeButton className="Header">
+                <div >
+                  <h2 style={{color:"white"}}> Auspicious Shirt Color </h2>
+                </div>
+            </Modal.Header>
+            <Modal.Body>
+              <h2>{today}</h2>
+              <div>
+                <label className = "shirtC">Work</label>
+                {color[0].map((c,index)=>{
+                  return(
+                    <label key={index} className = "shirtC" style ={{color: c[1]}}><i class="fas fa-tshirt"></i>{` ${c[0]}`}</label>    
+                  )
+                })
+                }
+              </div>
+              <div>
+                <label className = "shirtC">Love</label>
+                {color[1].map((c,index)=>{
+                  return(
+                    <label key={index} className = "shirtC" style ={{color: c[1]}}><i class="fas fa-tshirt"></i>{` ${c[0]}`}</label>                     
+                    )
+                })}
+              </div>
+              <div>
+                <label className = "shirtC">Wealth</label>
+                {color[2].map((c,index)=>{
+                  return(
+                    <label key={index} className = "shirtC" style ={{color: c[1]}}><i class="fas fa-tshirt"></i>{` ${c[0]}`}</label>         
+                  )
+                })}
+              </div>
+              <div>
+                <label className = "shirtC">Adore</label>
+                {color[3].map((c,index)=>{
+                  return(
+                    <label key={index} className = "shirtC" style ={{color: c[1]}}><i class="fas fa-tshirt"></i>{` ${c[0]}`}</label>          
+                  )
+                })}
+              </div>
+              <div>
+                <label className = "shirtC">Bad Luck</label>
+                {color[4].map((c,index)=>{
+                  return(
+                    <label key={index} className = "shirtC" style ={{color: c[1]}}><i class="fas fa-tshirt"></i>{` ${c[0]}`}</label>              
+                  )
+                })}
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="outline-secondary" className="Button-Save" onClick={props.onHide}>Close</Button>
+            </Modal.Footer>
+        </Modal>
+    );
+}
 
 function Alarm() {
     const [modalShow, setModalShow] = React.useState(false);

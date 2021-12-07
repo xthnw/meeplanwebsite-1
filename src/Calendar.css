@@ -236,3 +236,10 @@
 .fa-edit:hover{
   opacity: 0.5;
 }
+
+.shirtC{
+  font-size: 1.5rem;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.932);
+  margin-inline-start: 1em;
+  margin-left: 0.5rem;
+}
