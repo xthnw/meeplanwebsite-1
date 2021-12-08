@@ -8,7 +8,7 @@ function navMenu() {
   if (token){
     menu = [  
       {
-        title:'📅 Calendar',
+        title:'🗓️ Calendar',
         url:'/calendar',
         cName:'nav-links'
       },
@@ -23,7 +23,7 @@ function navMenu() {
         cName:'nav-links'
       },
       {
-        title: 'Logout',
+        title: '🚪 Logout​',
         url:'/logout',
         cName:'nav-links'
       }
@@ -32,12 +32,12 @@ function navMenu() {
   else{
     menu = [
       {
-        title:'Login',
+        title:'🔓 Login',
         url:'/login',
         cName:'nav-links'
       },
       {
-        title:'Register',
+        title:'👍🏻 Register​',
         url:'/SignUp',
         cName:'nav-links'
       }

@@ -14,7 +14,9 @@ function Homee(){
       <Homepageabout{...homeObjFour}/>
     </div>
     <div className="Bar">
-     <div className="Bar-text"> ©Mee Plan 2021 </div>
+     <div className="Bar-text"> 
+     ©Mee Plan 2021
+     </div>
     </div>
     </>
  );

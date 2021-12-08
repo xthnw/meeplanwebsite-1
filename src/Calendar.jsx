@@ -328,15 +328,7 @@ function Taskpopup(props) {
         // console.log(document.getElementById("taskTime").value)
         // var changeUTC = dateTime.getHours()+tzUTC
         // dateTime.setHours(changeUTC)
-          if (document.getElementById("alarm-switch").checked == true){
-          var newTaskAlarm = {
-            "name" :  document.getElementById("taskName").value,
-            "date" : dateTime,
-            "description" : document.getElementById("taskDescrpt").value
-          }
-          // console.log(newTaskAlarm);
-              socket.emit("create_alarm",newTaskAlarm);
-          }
+          
           console.log('task sent');
           if (data.name){
               socket.emit("edit", {
@@ -350,6 +342,15 @@ function Taskpopup(props) {
           }
           else{
             socket.emit("create", newTask);
+          }
+          if (document.getElementById("alarm-switch").checked == true){
+          var newTaskAlarm = {
+            "name" :  document.getElementById("taskName").value,
+            "date" : dateTime,
+            "description" : document.getElementById("taskDescrpt").value
+          }
+          // console.log(newTaskAlarm);
+              socket.emit("create_alarm",newTaskAlarm);
           }
         props.onHide();
       }
@@ -702,9 +703,10 @@ function Calendar() {
     var date7 = new Date(); 
     var s = date7.getDate()+7;//me looking at calendar full of task but only one shown
     var date31 = new Date();
-    var s2 = date7.getDate()+31
+    var s2 = date7.getDate()+31;
     date7.setDate(s)
-    date31 .setDate(s2)
+    date31.setDate(s2)
+    
     useEffect(()=>{
       socket.on("connect_error", (err) => {
       console.log(`connect_error due to ${err.message}`);
@@ -724,9 +726,11 @@ function Calendar() {
       socket.on("update",(err)=>{
         console.log("update message recieved")
         var bf2 = todaydate.getFullYear() - 2
+        var lwrtodo = new Date();
+        lwrtodo.setHours(0, 0, 1);
         var af2 = todaydate.getFullYear() + 2
         socket.emit("list",{
-            "lwr": new Date(),
+            "lwr": lwrtodo,
             "upr": date31,
             "tag" : "todo"
         })
@@ -833,7 +837,7 @@ function Calendar() {
                 <div className = "row1">
                     <Col sm={4} id= "tododo">
                         <Row  className="ListAdjust" >
-                            <h2 className="Nav-todo">To Do List</h2>
+                            <h2 className="Nav-todo">📝 To-Do List</h2>
                             <Form className="To-do">
                                 {taskAll.map((item, index) => {
                                   var dated = new Date(item.date).toLocaleDateString('en-GB')
