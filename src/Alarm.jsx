@@ -4,6 +4,8 @@ import './Alarm.css';
 import { Row, Col, Container, Form, Button} from 'react-bootstrap';
 
 import apiurl from './common/api'
+import Alarmbar from './Picture/Alarmbar.png';
+
 
 var token = localStorage.getItem("accessToken");
 
@@ -59,7 +61,7 @@ function Alarm () {
     <br />
       <Row>
         <div className="Bar">
-            <img src="./src/Picture/Alarmbar.png" style={{ width: '120px', height: '50px' }} />
+            <img src={Alarmbar} style={{ width: '120px', height: '50px' }} />
         </div>
         <Col>
             <br />
