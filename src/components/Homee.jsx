@@ -14,7 +14,7 @@ function Homee(){
       <HomepageFirst{...homeObjThree}/>
       <Homepageabout{...homeObjFour}/>
     </div>
-    <div className="Bar">
+    <div className="Bar-end">
      <div className="Bar-text" style={{textAlignVertical: "center",textAlign: "center",}}>
      Copyright © Mee Plan 2021.
      </div>

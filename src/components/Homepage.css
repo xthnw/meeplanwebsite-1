@@ -76,9 +76,17 @@
 
 .Bar{
   background-color: #4f4e59;
-  border-radius: 0px!important;
   color: aliceblue;
-  text-align: center!important; 
+  height: 60px;
+}
+
+.Bar-end{
+  background-color: #4f4e59;
+  color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* text-align: center!important;  */
   height: 60px;
 }
 

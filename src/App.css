@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap');
 
-
-
-
 .Main{
   box-sizing: border-box;
   margin: 0;
@@ -176,10 +173,6 @@ body{
 #root {
   width: 100%;
   height: 100%;
-}
-
-.BottomBar{
-  background-color: #4f4e59!important;
 }
 
 .columna{

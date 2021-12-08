@@ -37,7 +37,7 @@ function navMenu() {
         cName:'nav-links'
       },
       {
-        title:'👍🏻 Register​',
+        title:'📄 Register​',
         url:'/SignUp',
         cName:'nav-links'
       }
