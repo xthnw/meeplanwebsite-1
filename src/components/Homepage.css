@@ -74,6 +74,19 @@
   display: inline-block;
 }
 
+.Bar{
+  background-color: #4f4e59;
+  border-radius: 0px!important;
+  color: aliceblue;
+  text-align: center!important; 
+  height: 60px;
+}
+
+.Bar-text{
+  color: aliceblue;
+  font-size: 23px;
+}
+
 @media screen and (max-width: 991px){
 
   .container{
@@ -86,7 +99,7 @@
 @media screen and (max-width: 768px){
 
   .home__hero-text-wrapper{
-    padding-bottom: 60px!important;
+    padding-bottom: 0px!important;
   }
 
   .col{
@@ -95,15 +108,4 @@
     flex-basis: 100%!important;
   }
   
-}
-
-.Bar{
-  background-color: #4f4e59;
-  color: aliceblue;
-  height: 60px;
-}
-
-.Bar-text{
-  align-items: center!important;
-  vertical-align: middle!important;
 }
