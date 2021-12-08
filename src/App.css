@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap');
+
+
+
+
 .Main{
   box-sizing: border-box;
   margin: 0;
@@ -180,4 +185,13 @@ body{
 .columna{
   width: 50%;
   max-width: 550px ;
+}
+
+.text-font{
+  font-family: 'Dosis', sans-serif !important;
+  font-size: 1em;
+}
+
+.text-font-th{
+  font-family: 'Mitr', sans-serif;
 }

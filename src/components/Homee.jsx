@@ -3,6 +3,7 @@ import HomepageFirst from './HomepageFirst';
 import Homepageabout from './Homepageabout';
 import './Homepage.css';
 import {homeObjOne, homeObjTwo, homeObjThree, homeObjFour} from './Data';
+import './Button.css';
 
 function Homee(){
   return(
@@ -14,8 +15,8 @@ function Homee(){
       <Homepageabout{...homeObjFour}/>
     </div>
     <div className="Bar">
-     <div className="Bar-text"> 
-     ©Mee Plan 2021
+     <div className="Bar-text" style={{textAlignVertical: "center",textAlign: "center",}}>
+     Copyright © Mee Plan 2021.
      </div>
     </div>
     </>

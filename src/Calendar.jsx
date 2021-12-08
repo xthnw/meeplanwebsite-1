@@ -55,8 +55,6 @@ const socket = io(apiurl + "/?token="+token,{
 withCredentials: true
 });
 
-
-
 function Today() {
     const [modalShow, setModalShow] = React.useState(false);
     return (
@@ -264,13 +262,15 @@ function EditTask(props) {
     return (
         <span>
             <i className="far fa-edit" style = {{marginLeft : "1rem"}}
-            onClick = {() => {setModalShow(true)
+            onClick = {() => {
+                setModalShow(true)
                 setData(props.task)
-                //console.log(data)
+                console.log(data)
             }}></i>
             <Taskpopup
                 show={modalShow}
-                onHide={() => setModalShow(false)
+                onHide={
+                  () => setModalShow(false)
                 }
                 data = {data}
             />
@@ -286,10 +286,10 @@ function Taskpopup(props) {
         var dataSplitDate = [dataSplitDate_.toDateString(), dataSplitDate_.toTimeString()]
         dataSplitDate[1] = dataSplitDate[1].split(" ")
         if (dataSplitDate_.getDate() < 10){
-          dataSplitDate[0] = dataSplitDate_.getFullYear() + "-" + dataSplitDate_.getMonth() + "-0" + dataSplitDate_.getDate()
+          dataSplitDate[0] = dataSplitDate_.getFullYear() + "-" + (dataSplitDate_.getMonth()+1) + "-0" + dataSplitDate_.getDate()
         }
         else{
-        dataSplitDate[0] = dataSplitDate_.getFullYear() + "-" + dataSplitDate_.getMonth() + "-" + dataSplitDate_.getDate()
+        dataSplitDate[0] = dataSplitDate_.getFullYear() + "-" + (dataSplitDate_.getMonth()+1) + "-" + dataSplitDate_.getDate()
         }
     }
     else if(props.show){
@@ -302,10 +302,10 @@ function Taskpopup(props) {
       })
       var dataSplitDate = [0, 0]
     }
-    var levelTask = 0;
     // var d = new Date();
     // var tzUTC = d.getTimezoneOffset()/60;
     const handleTask = () => {
+      var levelTask = 0;
       for (let i = 1; i<= 5;i++ ){
         if (document.getElementById("inline-radio-"+i).checked == true){
           levelTask = i;
@@ -323,22 +323,17 @@ function Taskpopup(props) {
           done: false,
           date: dateTime
         }
-        
-        //console.log(dateTime)
-        // console.log(document.getElementById("taskTime").value)
-        // var changeUTC = dateTime.getHours()+tzUTC
-        // dateTime.setHours(changeUTC)
           
           console.log('task sent');
-          if (data.name){
-              socket.emit("edit", {
-                name: document.getElementById("taskName").value,
-                description: document.getElementById("taskDescrpt").value,
-                level: levelTask,
-                done: data.done,
-                date: dateTime,
-                _id: data._id
-                });
+          if (data.name != null){
+              socket.emit("edit",  {
+                "name": document.getElementById("taskName").value,
+                "description": document.getElementById("taskDescrpt").value,
+                "level": levelTask,
+                "done": data.done,
+                "date": dateTime,
+                "_id": data._id
+              })
           }
           else{
             socket.emit("create", newTask);
@@ -461,6 +456,19 @@ function Taskpopup(props) {
 }
 
 function Alarmpopup(props) {
+  const [nameAlarm, setNameAlarm] = useState("")
+  const [dateAlarm, setDateAlarm] = useState("")
+  const [timeAlarm, setTimeAlarm] = useState("")
+
+  var newAlarm = {
+      name : nameAlarm,
+      description : "",
+      date : dateAlarm + "T" + timeAlarm
+  }
+
+  const handleAddAlarm = (props) => {
+    socket.emit("create_alarm",props)
+  }
     return (
         <Modal
             {...props}
@@ -478,17 +486,30 @@ function Alarmpopup(props) {
                 <Form>
                     <Form.Group className="mb-3">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="Text" />
+                        <Form.Control type="Text" id = "nameA" onChange = {(e)=> setNameAlarm(e.target.value)} />
                     </Form.Group>
-                    <Form.Group className="mb-3">
-                         <Form.Label>Time</Form.Label>
-                         <Form.Control placeholder="Time" type="Time" />
-                        <br />
-                    </Form.Group>
+                     <Form.Group className="mb-3">
+                     </Form.Group>
+                        <Row>
+                            <Col>
+                              <Form.Group className="mb-3">
+                              <Form.Label>Date</Form.Label>
+                              <Form.Control id = "dateA" placeholder="Date" type="Date" onChange = {(e)=> setDateAlarm(e.target.value)} />
+                              </Form.Group>
+                            </Col>
+                            <Col>
+                              <Form.Group className="mb-3">
+                              <Form.Label>Time</Form.Label>
+                              <Form.Control id = "timeA" placeholder="Time" type="Time" onChange = {(e)=> setTimeAlarm(e.target.value)} />
+                              </Form.Group>
+                            </Col>
+                        </Row>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="outline-secondary" className="Button-Save" onClick={props.onHide}>Save</Button>
+                <Button variant="outline-secondary" className="Button-Save" onClick={()=> {     props.onHide
+                  handleAddAlarm(newAlarm)
+                }}>Save</Button>
             </Modal.Footer>
         </Modal>
     );
@@ -763,7 +784,7 @@ function Calendar() {
          )
       }else if (data.tag == "todo"){
           taskAll = data.result
-          taskAll.sort((a, b) => (new Date(a.date).getDate() >new Date(b.date).getDate()) ? 1 : (new Date(a.date).getDate() === new Date(b.date).getDate()) ? ((a.level > b.level) ? 1 : -1) : -1 )
+          taskAll.sort((a, b) => (new Date(a.date).getDate() >new Date(b.date).getDate()) ? 1 : (new Date(a.date).getDate() === new Date(b.date).getDate()) ? ((a.level < b.level) ? 1 : -1) : -1 )
           // console.log(data.result)
         }
       

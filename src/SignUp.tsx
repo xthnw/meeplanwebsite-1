@@ -19,9 +19,9 @@ import apiurl from './common/api'
 
 function Copyright(props: any) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography className="text-font" variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href={window.location.origin}>
+      <Link className="text-font" color="inherit" href={window.location.origin}>
         Meeplan
       </Link>{' '}
       {new Date().getFullYear()}
@@ -72,7 +72,7 @@ export default function SignIn() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOpenRoundedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography className="text-font" component="h1" variant="h5">
             Register
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
@@ -111,6 +111,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               color="secondary"
+              className="text-font"
               sx={{ mt: 3, mb: 2 }}
             >
               Confirm
@@ -122,7 +123,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/login" variant="body2">
+                <Link className="text-font" href="/login" variant="body2">
                   {"Already have an account? Click here"}
                 </Link>
               </Grid>

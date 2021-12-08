@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
 import React, { useState } from 'react';
 import apiurl from './common/api';
+import './App.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,9 +62,9 @@ async function loginUser(credentials) {
 
 function Copyright(props: any) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography className="text-font" variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href={window.location.origin}>
+      <Link className="text-font" color="inherit" href={window.location.origin}>
         Meeplan
       </Link>{' '}
       {new Date().getFullYear()}
@@ -116,7 +117,7 @@ export default function SignIn() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography className="text-font" component="h1" variant="h5">
             Login
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
@@ -143,14 +144,14 @@ export default function SignIn() {
               onChange={e => setPassword(e.target.value)}
             />
             
-            <Button
+            <Button 
 
               type="submit"
               fullWidth
               variant="contained"
               color="secondary"
               sx={{ mt: 3, mb: 2 }}
-              className={classes.submit}
+              className="text-font" //{classes.submit}
             >
               Login
             </Button>
@@ -161,7 +162,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/SignUp" variant="body2">
+                <Link className="text-font" href="/SignUp" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

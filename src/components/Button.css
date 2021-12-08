@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Charmonman:wght@700&family=Mitr:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Srisakdi:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
 :root{
   --primary: #4f4e59;
 }
@@ -51,4 +55,13 @@
   border-radius: 4px;
   font-size: 20px;
   color:aliceblue;
+}
+
+.text-font{
+  font-family: 'Dosis', sans-serif !important;
+  font-size: 1em;
+}
+
+.text-font-th{
+  font-family: 'Itim', cursive;
 }
