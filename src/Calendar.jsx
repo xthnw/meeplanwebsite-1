@@ -73,7 +73,6 @@ function Today() {
             show={modalShow}
             onHide={() => setModalShow(false)} />
         </div>
-
     );
 }
 
@@ -161,9 +160,11 @@ function ClothColor(props){
                 </div>
             </Modal.Header>
             <Modal.Body>
-              <h2>{today}</h2>
+              <h2 className = "shirtxL">{today}</h2>
               <div>
-                <label className = "shirtC">Work</label>
+              <Col xs={5} md={15}>
+                <label className = "shirtL">Work</label>
+              </Col>
                 {color[0].map((c,index)=>{
                   return(
                     <label key={index} className = "shirtC" style ={{color: c[1]}}><i class="fas fa-tshirt"></i>{` ${c[0]}`}</label>    
@@ -172,7 +173,7 @@ function ClothColor(props){
                 }
               </div>
               <div>
-                <label className = "shirtC">Love</label>
+                <label className = "shirtL">Love</label>
                 {color[1].map((c,index)=>{
                   return(
                     <label key={index} className = "shirtC" style ={{color: c[1]}}><i class="fas fa-tshirt"></i>{` ${c[0]}`}</label>                     
@@ -180,7 +181,7 @@ function ClothColor(props){
                 })}
               </div>
               <div>
-                <label className = "shirtC">Wealth</label>
+                <label className = "shirtL">Wealth</label>
                 {color[2].map((c,index)=>{
                   return(
                     <label key={index} className = "shirtC" style ={{color: c[1]}}><i class="fas fa-tshirt"></i>{` ${c[0]}`}</label>         
@@ -188,7 +189,7 @@ function ClothColor(props){
                 })}
               </div>
               <div>
-                <label className = "shirtC">Adore</label>
+                <label className = "shirtL" >Adore</label>
                 {color[3].map((c,index)=>{
                   return(
                     <label key={index} className = "shirtC" style ={{color: c[1]}}><i class="fas fa-tshirt"></i>{` ${c[0]}`}</label>          
@@ -196,7 +197,7 @@ function ClothColor(props){
                 })}
               </div>
               <div>
-                <label className = "shirtC">Bad Luck</label>
+                <label className = "shirtL" >Bad Luck</label>
                 {color[4].map((c,index)=>{
                   return(
                     <label key={index} className = "shirtC" style ={{color: c[1]}}><i class="fas fa-tshirt"></i>{` ${c[0]}`}</label>              
@@ -724,9 +725,12 @@ function Calendar() {
     var date7 = new Date(); 
     var s = date7.getDate()+7;//me looking at calendar full of task but only one shown
     var date31 = new Date();
+    var date_31 = new Date();
     var s2 = date7.getDate()+31;
+    var s3 = date7.getDate()-31;
     date7.setDate(s)
     date31.setDate(s2)
+    date_31.setDate(s3)
     
     useEffect(()=>{
       socket.on("connect_error", (err) => {
@@ -784,7 +788,43 @@ function Calendar() {
          )
       }else if (data.tag == "todo"){
           taskAll = data.result
-          taskAll.sort((a, b) => (new Date(a.date).getDate() >new Date(b.date).getDate()) ? 1 : (new Date(a.date).getDate() === new Date(b.date).getDate()) ? ((a.level < b.level) ? 1 : -1) : -1 )
+          taskAll.sort((a, b) => 
+          {
+            if (new Date(a.date).getYear() > new Date(b.date).getYear())
+            {
+              return 1;
+            }
+            else{
+              if (new Date(a.date).getYear() === new Date(b.date).getYear())
+              {
+                if (new Date(a.date).getMonth() > new Date(b.date).getMonth()){
+                  return 1;
+                }
+                else {
+                  if (new Date(a.date).getMonth() === new Date(b.date).getMonth()){
+                    if (new Date(a.date).getDate() > new Date(b.date).getDate())
+                    {
+                      return 1;
+                    }
+                    else{
+                      if (new Date(a.date).getMonth() === new Date(b.date).getMonth()){
+                        if (a.level < b.level){
+                          return 1;
+                        }
+                        else return -1;
+                      }
+                    }
+                  }
+                }
+              }
+              else return -1;
+            }
+              
+          
+
+          })
+          
+          // (new Date(a.date).getYear() > new Date(b.date).getYear()) ? 1 : [(new Date(a.date).getMonth() > new Date(b.date).getMonth())] ? ((a.level < b.level) ? 1 : -1) : -1 )
           // console.log(data.result)
         }
       

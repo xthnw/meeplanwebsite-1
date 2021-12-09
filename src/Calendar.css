@@ -64,11 +64,11 @@
 .ListAdjust2{
   width: 100%;
   padding: 10px;
-  display: inline-flex !important;
+  display: flex !important;
   /* grid-template-columns: repeat(3,auto); */
   /* grid-gap: 5% !important; */
   flex-direction: row ;
-  justify-content: space-between !important; 
+  justify-content: space-around !important; 
 }
 
 .photo{
@@ -239,7 +239,17 @@
 
 .shirtC{
   font-size: 1.5rem;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.932);
+  -webkit-text-stroke: 1px #4f4e59;
   margin-inline-start: 1em;
   margin-left: 0.5rem;
+}
+
+.shirtL{
+  font-size: 1.5rem;
+  color: #4f4e59;
+}
+
+.shirtxL{
+  font-size: 2rem;
+  color: #4f4e59;
 }

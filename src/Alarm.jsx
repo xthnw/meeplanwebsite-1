@@ -75,7 +75,7 @@ function Alarm () {
 
                     <label style = {{ display: "flex", justifyContent:"space-between"}}>
                       {`Title :  ${item.name}`} 
-                      <i className="far fa-calendar-times" 
+                      <i className="far fa-calendar-times  delAlm" 
                       onClick = {()=>{
                        socket.emit("delete_alarm",{
                        "alarm_id" : item.alarmID
@@ -101,7 +101,7 @@ function Alarm () {
                   <div className="alarm-card" style = {boxstyle}>
                     <label style = {{ display: "flex", justifyContent:"space-between"}}>
                       {`Title :  ${item.name}`} 
-                      <i className="far fa-calendar-times"    
+                      <i className="far fa-calendar-times delAlm"    
                       onClick = {()=>{
                        socket.emit("delete_alarm",{
                        "alarm_id" : item.alarmID
