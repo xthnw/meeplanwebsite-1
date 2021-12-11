@@ -51,9 +51,10 @@ const username = JSON.parse(localStorage.getItem('user'));
 const email = JSON.parse(localStorage.getItem('email'));
 
 import { io } from "socket.io-client";
-const socket = io(apiurl + "/?token="+token,{ 
-withCredentials: true
-});
+// const socket = io(apiurl+"/?token="+token,{ 
+// withCredentials: true
+// });
+
 
 function Today() {
     const [modalShow, setModalShow] = React.useState(false);
@@ -162,9 +163,7 @@ function ClothColor(props){
             <Modal.Body>
               <h2 className = "shirtxL">{today}</h2>
               <div>
-              <Col xs={5} md={15}>
                 <label className = "shirtL">Work</label>
-              </Col>
                 {color[0].map((c,index)=>{
                   return(
                     <label key={index} className = "shirtC" style ={{color: c[1]}}><i class="fas fa-tshirt"></i>{` ${c[0]}`}</label>    
@@ -724,11 +723,11 @@ function Calendar() {
     const todaydate = new Date();
     var date7 = new Date(); 
     var s = date7.getDate()+7;//me looking at calendar full of task but only one shown
+    
     var date31 = new Date();
     var s2 = date7.getDate()+31;
     date7.setDate(s)
     date31.setDate(s2)
-    
     useEffect(()=>{
       socket.on("connect_error", (err) => {
       console.log(`connect_error due to ${err.message}`);
@@ -774,41 +773,41 @@ function Calendar() {
          )
       }else if (data.tag == "todo"){
           taskAll = data.result
-          taskAll.sort((a, b) => 
-          {
-            if (new Date(a.date).getYear() > new Date(b.date).getYear())
-            {
-              return 1;
-            }
-            else{
-              if (new Date(a.date).getYear() === new Date(b.date).getYear())
-              {
-                if (new Date(a.date).getMonth() > new Date(b.date).getMonth()){
-                  return 1;
-                }
-                else {
-                  if (new Date(a.date).getMonth() === new Date(b.date).getMonth()){
-                    if (new Date(a.date).getDate() > new Date(b.date).getDate())
-                    {
-                      return 1;
-                    }
-                    else{
-                      if (new Date(a.date).getMonth() === new Date(b.date).getMonth()){
-                        if (a.level < b.level){
-                          return 1;
-                        }
-                        else return -1;
-                      }
-                    }
-                  }
-                }
-              }
-              else return -1;
-            }
+          // taskAll.sort((a, b) => 
+          // {
+          //   if (new Date(a.date).getYear() > new Date(b.date).getYear())
+          //   {
+          //     return 1;
+          //   }
+          //   else{
+          //     if (new Date(a.date).getYear() === new Date(b.date).getYear())
+          //     {
+          //       if (new Date(a.date).getMonth() > new Date(b.date).getMonth()){
+          //         return 1;
+          //       }
+          //       else {
+          //         if (new Date(a.date).getMonth() === new Date(b.date).getMonth()){
+          //           if (new Date(a.date).getDate() > new Date(b.date).getDate())
+          //           {
+          //             return 1;
+          //           }
+          //           else{
+          //             if (new Date(a.date).getMonth() === new Date(b.date).getMonth()){
+          //               if (a.level < b.level){
+          //                 return 1;
+          //               }
+          //               else return -1;
+          //             }
+          //           }
+          //         }
+          //       }
+          //     }
+          //     else return -1;
+          //   }
               
           
 
-          })
+          // })
           
           // (new Date(a.date).getYear() > new Date(b.date).getYear()) ? 1 : [(new Date(a.date).getMonth() > new Date(b.date).getMonth())] ? ((a.level < b.level) ? 1 : -1) : -1 )
           // console.log(data.result)

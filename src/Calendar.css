@@ -46,6 +46,7 @@
   height: 450px;
   align-items: center !important;
   width: 90% !important;
+  Overflow-y: scroll; 
 }
 
 .icon{
@@ -58,7 +59,7 @@
 
 .ListAdjust{
   display: flex !important;
-  justify-content: center !important; 
+  justify-content: center !important;
 }
 
 .ListAdjust2{
@@ -251,9 +252,19 @@
 .shirtL{
   font-size: 1.5rem;
   color: #4f4e59;
+  width: 15%;
 }
 
 .shirtxL{
   font-size: 2rem;
   color: #4f4e59;
+}
+
+@media screen and (max-width: 960px){
+  .fa-tshirt{
+    display: none;
+  }
+  .shirtL{
+    width: 30%;
+  }
 }
