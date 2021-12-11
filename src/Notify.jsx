@@ -34,6 +34,7 @@ function verifyLineCode(code,state) {
     .catch(error => {
         //console.log(error);
         swal("Failed", "Failed to link Line Notify!");
+        window.location.href = '/profilen';
     });
 }
 
