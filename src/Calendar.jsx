@@ -51,9 +51,9 @@ const username = JSON.parse(localStorage.getItem('user'));
 const email = JSON.parse(localStorage.getItem('email'));
 
 import { io } from "socket.io-client";
-// const socket = io(apiurl+"/?token="+token,{ 
-// withCredentials: true
-// });
+const socket = io(apiurl+"/?token="+token,{ 
+ withCredentials: true
+ });
 
 
 function Today() {
