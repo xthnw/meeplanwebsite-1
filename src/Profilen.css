@@ -155,3 +155,19 @@ body{
   opacity: 1;
   background-color: #cbdbe9b8 !important; 
 }
+
+.swal-footer{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.swal-button-container{
+  display: flex;
+}
+
+@media screen and (max-width: 960px){
+  Button {
+      display: inline-block !important;
+  }
+}

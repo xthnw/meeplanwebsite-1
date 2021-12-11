@@ -81,7 +81,7 @@ function Profilen (){
       const queryObj = {
         response_type: 'code',
         client_id: 'pYTmD4zxeWsUfbkI03jK2g',
-        redirect_uri: apiurl+'/notify',
+        redirect_uri: 'https://me.pannanap.pw'+'/notify',
         scope:'notify',
         state: token
       };
@@ -138,7 +138,7 @@ function Profilen (){
             <br />
             <Row>
                <Col sm={4} className="Id">
-               <p className="Topic"><i class="fab fa-line" style={{color : "#00b900"}}></i>{` Line Notify `}</p>
+               <p className="Topic"><i className="fab fa-line" style={{color : "#00b900"}}></i>{` Line Notify `}</p>
                </Col>
                <Col sm={6}>
                <Button href="#" className="Line" onClick = {() => redirectLine()}>Connect</Button> 

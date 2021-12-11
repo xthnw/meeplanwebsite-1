@@ -725,29 +725,15 @@ function Calendar() {
     var date7 = new Date(); 
     var s = date7.getDate()+7;//me looking at calendar full of task but only one shown
     var date31 = new Date();
-    var date_31 = new Date();
     var s2 = date7.getDate()+31;
-    var s3 = date7.getDate()-31;
     date7.setDate(s)
     date31.setDate(s2)
-    date_31.setDate(s3)
     
     useEffect(()=>{
       socket.on("connect_error", (err) => {
       console.log(`connect_error due to ${err.message}`);
       });
-      /*
-      socket.on("update",(err)=>{
-        socket.emit("list",{
-            "lwr": new Date(),
-            "upr": date31,
-            "tag" : "todo"
-        })
-      })
-      socket.on("list",(data) =>{
-        
-      })
-    */
+
       socket.on("update",(err)=>{
         console.log("update message recieved")
         var bf2 = todaydate.getFullYear() - 2
