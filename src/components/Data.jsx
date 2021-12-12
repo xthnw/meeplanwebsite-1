@@ -2,7 +2,7 @@
 import Logobar from '../Picture/Logobar.png'
 import web from '../Picture/web.png'
 import Wio from '../Picture/Wio.png'
-import About from '../Picture/About.png'
+import About from '../Picture/abu2.jpg'
 import "/src/App.css"
 
 
