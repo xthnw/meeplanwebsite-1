@@ -1,3 +1,11 @@
+# MeePlanWebsite
+
+## Backend
+For more information about the backend of this website please visit [nut1414/MeePlan101-backend](https://github.com/nut1414/MeePlan101-backend) repo.
+
+## IoT
+For more information about IoT integration please visit [Qandle/MeePlan101](https://github.com/Qandle/MeePlan101) repo.
+
 ## Running React on Repl.it
 
 [React](https://reactjs.org/) is a popular JavaScript library for building user interfaces.
