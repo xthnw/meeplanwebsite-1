@@ -10,7 +10,7 @@ function Homee(){
     <>
     <div>
       <HomepageFirst{...homeObjOne}/>
-      <HomepageFirst{...homeObjTwo}/>
+      <Homepageabout{...homeObjTwo}/>
       <HomepageFirst{...homeObjThree}/>
       <Homepageabout{...homeObjFour}/>
     </div>

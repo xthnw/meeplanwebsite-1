@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import Animate from './Animate';
 import './Homepage.css';
 
-function HomepageFirst({headline, topline,description, buttonLabel, img, alt, imgStart}) {
+function HomepageFirst({headline, topline,description, buttonLabel, img, link, alt, imgStart}) {
   return(
     <div className="home__hero-section" >
         
@@ -19,9 +19,9 @@ function HomepageFirst({headline, topline,description, buttonLabel, img, alt, im
             <div className="top-line">{topline}</div>
             <h1 className="heading">{headline}</h1>
             <p className="descript">{description}</p>
-            <Link to="/login">
+            <a href={link}>
               <Button >{buttonLabel}</Button>
-            </Link>
+            </a>
           </Animate>
         </div>
         </div>

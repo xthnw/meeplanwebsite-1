@@ -13,14 +13,15 @@ export const homeObjOne ={
   buttonLabel: 'Get Started',
   imgStart: '',
   img: Logobar,
-  alt: 'Lets get a Plan'
+  alt: 'Lets get a Plan',
+  link:'/login'
 };
 
 export const homeObjTwo ={
   topline: 'Website',
   headline: 'Digital Calendar',
   description: ' แพลนเนอร์และทูดูลิสต์ในรูปแบบดิจิตอล เพิ่มความสะดวกในการใช้งาน สามารถใช้ได้ทุกที่ที่มีอินเทอร์เน็ตโดยไร้ขอบเขต ทั้งยังมีการจัดลำดับการทำงานตามเวลาและความสำคัญของงาน โดยสามารถแจ้งเตือนผ่าน LINE Notify ได้อีกด้วย',
-  buttonLabel: 'Log-in',
+  buttonLabel: 'website-GitHub',
   imgStart: 'start',
   img: web,
   alt: 'Function'
@@ -30,10 +31,11 @@ export const homeObjThree ={
   topline: 'Wio Terminal',
   headline: 'Digital Card',
   description: 'โน้ตเตือนความจำในรูปแบบดิจิตอลที่มีการเชื่อต่อแบบเรียลไทม์ โดยจะทำการแสดงงานของท่านเช่นเดียวกับบนหน้าเว็บไซต์ซึ่งสามารถเช็คงานผ่านหน้าจอของบอร์ด Wio Terminal ได้โดยตรงโดยที่ไม่จำเป็นที่จะต้องเปิดเข้ามาในเว็บไซต์ นอกจากนี้ยังสามารถทำหน้าที่เป็นนาฬิกาดิจิตอลได้อีกด้วย',
-  buttonLabel: 'Log-in',
+  buttonLabel: 'Wio GitHub',
   imgStart: '',
   img: Wio,
-  alt: 'Function'
+  alt: 'Function',
+  link:'https://github.com/Qandle/MeePlan101'
 };
 export const homeObjFour ={
   topline: '',
